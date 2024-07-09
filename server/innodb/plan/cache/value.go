@@ -14,8 +14,8 @@
 package cache
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/ast"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/plan"
+	"xmysql-server/server/innodb/ast"
+	"xmysql-server/server/innodb/plan"
 )
 
 // Value is the interface that every value in LRU Cache should implement.

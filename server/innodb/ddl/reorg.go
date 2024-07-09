@@ -16,11 +16,11 @@ package ddl
 import (
 	"github.com/juju/errors"
 	log "github.com/sirupsen/logrus"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/meta"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/model"
 	"sync/atomic"
 	"time"
+	"xmysql-server/server/innodb/context"
+	"xmysql-server/server/innodb/meta"
+	"xmysql-server/server/innodb/model"
 )
 
 // reorgCtx is for reorganization.

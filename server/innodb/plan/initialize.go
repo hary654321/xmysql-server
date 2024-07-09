@@ -14,7 +14,7 @@
 package plan
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
+	"xmysql-server/server/innodb/context"
 )
 
 const (

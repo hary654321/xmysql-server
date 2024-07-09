@@ -4,18 +4,20 @@ import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/tuple"
 	"strconv"
 	"strings"
+	"xmysql-server/server/common"
+	"xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/tuple"
 
-	"github.com/zhukovaskychina/xmysql-server/util"
+	"xmysql-server/util"
 )
 
-/***
+/*
+**
 ########################################################################################################################
-**/
+*
+*/
 type SecondaryLeafRowHeader struct {
 	basic.FieldDataHeader
 
@@ -238,7 +240,7 @@ func (cldr *SecondaryLeafRowHeader) IsValueNullByIdx(index byte) bool {
 
 }
 
-//暂时不考虑溢出页
+// 暂时不考虑溢出页
 func (cldr *SecondaryLeafRowHeader) SetValueLengthByIndex(realLength int, index byte) {
 
 	fieldType := cldr.FrmMeta.GetColumnInfos(index).FieldType
@@ -266,12 +268,13 @@ func (cldr *SecondaryLeafRowHeader) SetValueLengthByIndex(realLength int, index 
 
 }
 
-//获取可变变量长度
+// 获取可变变量长度
 func (cldr *SecondaryLeafRowHeader) GetVarValueLengthByIndex(index byte) int {
 	return int(cldr.VarLengthContentMap[index])
 }
 
-/****
+/*
+***
 
 根据header获取实际长度
 需要判断NullContent的值
@@ -297,9 +300,11 @@ func (cldr *SecondaryLeafRowHeader) GetRecordBytesRealLength() int {
 	return result
 }
 
-/***
+/*
+**
 ########################################################################################################################
-**/
+*
+*/
 type SecondaryLeafRowData struct {
 	basic.FieldDataValue
 	Content   []byte

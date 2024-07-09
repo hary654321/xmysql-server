@@ -1,7 +1,7 @@
 package basic
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/common"
+	"xmysql-server/server/common"
 )
 
 // ValType specifies the type for SQLVal.
@@ -79,7 +79,7 @@ func (s CompareType) String() string {
 	return string(s)
 }
 
-//定义基本value接口，用于具体实现int,bigint,varchar,datetime,float,double等具体数据类型
+// 定义基本value接口，用于具体实现int,bigint,varchar,datetime,float,double等具体数据类型
 type Value interface {
 	//定义未经加工的
 	Raw() interface{}

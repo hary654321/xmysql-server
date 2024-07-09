@@ -21,7 +21,7 @@ import (
 	"unicode/utf8"
 
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/util/hack"
+	"xmysql-server/server/innodb/util/hack"
 )
 
 // Type returns type of JSON as string.
@@ -53,8 +53,9 @@ func (j JSON) Type() string {
 }
 
 // Extract receives several path expressions as arguments, matches them in j, and returns:
-//  ret: target JSON matched any path expressions. maybe autowrapped as an array.
-//  found: true if any path expressions matched.
+//
+//	ret: target JSON matched any path expressions. maybe autowrapped as an array.
+//	found: true if any path expressions matched.
 func (j JSON) Extract(pathExprList []PathExpression) (ret JSON, found bool) {
 	elemList := make([]JSON, 0, len(pathExprList))
 	for _, pathExpr := range pathExprList {

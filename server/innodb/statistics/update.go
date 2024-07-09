@@ -15,15 +15,15 @@ package statistics
 
 import (
 	"fmt"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/schemas"
 	"sync"
 	"time"
+	"xmysql-server/server/innodb/schemas"
 
 	"github.com/juju/errors"
 	log "github.com/sirupsen/logrus"
 
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/model"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/sessionctx/variable"
+	"xmysql-server/server/innodb/model"
+	"xmysql-server/server/innodb/sessionctx/variable"
 )
 
 type tableDeltaMap map[int64]variable.TableDelta

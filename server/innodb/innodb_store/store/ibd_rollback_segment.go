@@ -1,6 +1,6 @@
 package store
 
-import "github.com/zhukovaskychina/xmysql-server/server/innodb/innodb_store/store/storebytes/segs"
+import "xmysql-server/server/innodb/innodb_store/store/storebytes/segs"
 
 //128个回滚段，每个段1024个slot
 type RollBackSegs struct {

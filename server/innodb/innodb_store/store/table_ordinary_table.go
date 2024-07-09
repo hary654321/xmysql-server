@@ -1,17 +1,17 @@
 package store
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/conf"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
 	"strings"
+	"xmysql-server/server/conf"
+	"xmysql-server/server/innodb/basic"
 
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/schemas"
-	tuple2 "github.com/zhukovaskychina/xmysql-server/server/innodb/tuple"
+	"xmysql-server/server/innodb/schemas"
+	tuple2 "xmysql-server/server/innodb/tuple"
 )
 
-//定义一般业务表
-//包括了表信息，存储路径，索引信息
-//需要SysIndex构建出BTree
+// 定义一般业务表
+// 包括了表信息，存储路径，索引信息
+// 需要SysIndex构建出BTree
 type OrdinaryTable struct {
 	schemas.Table
 

@@ -14,17 +14,17 @@
 package plan
 
 import (
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/ddl"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/schemas"
 	"math"
 	"strings"
+	types "xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/ddl"
+	"xmysql-server/server/innodb/schemas"
 
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/ast"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/parser"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/util/charset"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
+	"xmysql-server/server/innodb/ast"
+	"xmysql-server/server/innodb/parser"
+	"xmysql-server/server/innodb/util/charset"
+	"xmysql-server/server/mysql"
 )
 
 // Validate checkes whether the node is valid.

@@ -2,11 +2,11 @@ package store
 
 import (
 	"errors"
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/buffer_pool"
-	"github.com/zhukovaskychina/xmysql-server/util"
 	"log"
+	"xmysql-server/server/common"
+	"xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/buffer_pool"
+	"xmysql-server/util"
 )
 
 func (self *BTree) Add(key basic.Value, value basic.Row) (err error) {
@@ -170,7 +170,7 @@ func (self *BTree) internalInsert(n uint32, key basic.Value, value basic.Row) (a
 	return a, b, nil
 }
 
-//TODO 暂时去除去除重复key
+// TODO 暂时去除去除重复key
 func (self *BTree) leafInsert(n uint32, key basic.Value, value basic.Row) (a, b uint32, err error) {
 
 	var mustSplit bool = false
@@ -224,10 +224,14 @@ func (self *BTree) leafInsert(n uint32, key basic.Value, value basic.Row) (a, b 
 	return n, 0, nil
 }
 
-/***
-   先分裂当前叶子节点，
-	然后待插入值，判断左右，如果小于b的最小值，那么则插入a节点
-***/
+/*
+**
+
+	   先分裂当前叶子节点，
+		然后待插入值，判断左右，如果小于b的最小值，那么则插入a节点
+
+**
+*/
 func (self *BTree) leafSplit(n uint32, key basic.Value, value basic.Row) (a, b uint32, err error) {
 	a = n
 	//申请叶子页面

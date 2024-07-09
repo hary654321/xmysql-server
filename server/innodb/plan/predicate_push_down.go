@@ -14,13 +14,13 @@ package plan
 
 import (
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/ast"
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/expression"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/model"
+	"xmysql-server/server/innodb/ast"
+	types "xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/context"
+	"xmysql-server/server/innodb/expression"
+	"xmysql-server/server/innodb/model"
 
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
+	"xmysql-server/server/mysql"
 )
 
 type ppdSolver struct{}

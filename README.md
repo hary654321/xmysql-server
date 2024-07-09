@@ -44,14 +44,14 @@ xmysql-server 本项目是本人基于现有文档的一个练手项目，加以
 #### 安装教程
 
 ```
-git clone -b xxx https://github.com/zhukovaskychina/xmysql-server.git
+git clone -b xxx https://xmysql-server.git
 
 cd xmysql-server&& sh ./build.sh
 ```
 
 #### 启动效果
 
-![https://github.com/zhukovaskychina/xmysql-server/blob/main/pics/startup.png?raw=true](https://github.com/zhukovaskychina/xmysql-server/blob/main/pics/startup.png?raw=true)
+![https://xmysql-server/blob/main/pics/startup.png?raw=true](https://xmysql-server/blob/main/pics/startup.png?raw=true)
 
 #### 软件架构（待补充）
 

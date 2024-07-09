@@ -2,7 +2,7 @@ package pages
 
 //go:generate mockgen -source=page.go -destination ./age_mock.go -package pages
 
-import "github.com/zhukovaskychina/xmysql-server/util"
+import "xmysql-server/util"
 
 type FileHeader struct {
 	FilePageSpaceOrCheckSum []byte //4校验，表示该页面的校验和

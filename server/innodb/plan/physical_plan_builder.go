@@ -15,18 +15,18 @@ package plan
 
 import (
 	"fmt"
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/util/ranger"
 	"math"
+	types "xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/util/ranger"
 
 	"github.com/juju/errors"
 	log "github.com/sirupsen/logrus"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/expression"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/expression/aggregation"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/model"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/terror"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
+	"xmysql-server/server/innodb/context"
+	"xmysql-server/server/innodb/expression"
+	"xmysql-server/server/innodb/expression/aggregation"
+	"xmysql-server/server/innodb/model"
+	"xmysql-server/server/innodb/terror"
+	"xmysql-server/server/mysql"
 )
 
 const (

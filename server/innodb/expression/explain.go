@@ -17,7 +17,7 @@ import (
 	"bytes"
 	"fmt"
 
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
+	types "xmysql-server/server/innodb/basic"
 )
 
 // ExplainInfo implements the Expression interface.

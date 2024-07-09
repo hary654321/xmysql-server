@@ -2,17 +2,18 @@ package store
 
 import (
 	"fmt"
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/server/conf"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/buffer_pool"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/innodb_store/store/storebytes/blocks"
 	"path"
 	"sync"
+	"xmysql-server/server/common"
+	"xmysql-server/server/conf"
+	"xmysql-server/server/innodb/buffer_pool"
+	"xmysql-server/server/innodb/innodb_store/store/storebytes/blocks"
 
-	"github.com/zhukovaskychina/xmysql-server/util"
+	"xmysql-server/util"
 )
 
-/*************
+/*
+************
 
 系统表空间和独立空间的前3个页面一致，
 但是3-7的页面是系统表空间独有的。
@@ -34,7 +35,8 @@ import (
 尽量获得hint page;
 如果segment上未使用的page太多，则尽量利用segment上的page。
 
-***********/
+**********
+*/
 type SysTableSpace struct {
 	conf       *conf.Cfg
 	blockFile  *blocks.BlockFile
@@ -94,7 +96,7 @@ func (sysTable *SysTableSpace) LoadExtentFromDisk(extentNumber int) Extent {
 	panic("implement me")
 }
 
-//初始化数据库
+// 初始化数据库
 func NewSysTableSpace(cfg *conf.Cfg, IsInit bool) TableSpace {
 	tableSpace := new(SysTableSpace)
 	tableSpace.conf = cfg
@@ -169,7 +171,7 @@ func (sysTable *SysTableSpace) initHeadPage() {
 
 }
 
-//初始化数据字典
+// 初始化数据字典
 func (sysTable *SysTableSpace) initDatabaseDictionary() {
 	sysTable.DictionarySys = NewDictionarySysByWrapper(sysTable.DataDict)
 	sysTable.DictionarySys.initDictionary(sysTable)
@@ -177,8 +179,8 @@ func (sysTable *SysTableSpace) initDatabaseDictionary() {
 
 //初始化各种系统表
 
-//SysTableSpaces
-//SysDataFiles
+// SysTableSpaces
+// SysDataFiles
 func (sysTable *SysTableSpace) initAllSysTables() {
 
 	sysTable.DictionarySys.initializeSysTableSpacesTable(common.INFORMATION_SCHEMAS, NewSysSpacesTuple())
@@ -191,15 +193,14 @@ func (sysTable *SysTableSpace) initFreeLimit() {
 	sysTable.initFspExtents()
 }
 
-//初始化FspExtent信息
+// 初始化FspExtent信息
 func (sysTable *SysTableSpace) initFspExtents() {
 	sysTable.Fsp.SetFspFreeExtentListInfo(&CommonNodeInfo{NodeInfoLength: 1, PreNodePageNumber: 0, PreNodeOffset: 0, NextNodePageNumber: 0, NextNodeOffset: 190})
 	sysTable.Fsp.SetFreeLimit(128)
 	sysTable.Fsp.SetFspFreeFragExtentListInfo(&CommonNodeInfo{NodeInfoLength: 1, PreNodePageNumber: 0, PreNodeOffset: 0, NextNodePageNumber: 0, NextNodeOffset: 150})
 }
 
-//初始化字典段
-//
+// 初始化字典段
 func (sysTable *SysTableSpace) initSysTableClusterSegments() {
 	dataDictSegs := NewDataSegmentWithTableSpaceAtInit(0, 2, 0, "SYS_TABLES_CLUSTER", sysTable)
 	internalSegs := NewInternalSegmentWithTableSpaceAtInit(0, 2, "SYS_TABLES_CLUSTER", 1, sysTable)
@@ -210,8 +211,7 @@ func (sysTable *SysTableSpace) initSysTableClusterSegments() {
 	dataDictSegs.AllocateLeafPage()
 }
 
-//初始化字典段
-//
+// 初始化字典段
 func (sysTable *SysTableSpace) initSysTableIdsSegments() {
 	dataDictSegs := NewDataSegmentWithTableSpaceAtInit(0, 2, 2, "SYS_TABLE_IDS", sysTable)
 	internalSegs := NewInternalSegmentWithTableSpaceAtInit(0, 2, "SYS_TABLE_IDS", 3, sysTable)
@@ -248,7 +248,7 @@ func (sysTable *SysTableSpace) initSysTableFieldsSegments() {
 	dataDictSegs.AllocateLeafPage()
 }
 
-//初始化数据字典表
+// 初始化数据字典表
 func (sysTable *SysTableSpace) initSysTableDataDict() {
 	sysTable.initSysTableClusterSegments()
 	sysTable.initSysTableIdsSegments()
@@ -303,7 +303,7 @@ func (sysTable *SysTableSpace) LoadPageByPageNumber(pageNo uint32) ([]byte, erro
 	return sysTable.blockFile.ReadPageByNumber(pageNo)
 }
 
-//获取所有的完全用满的InodePage链表
+// 获取所有的完全用满的InodePage链表
 func (sysTable *SysTableSpace) GetSegINodeFullList() *INodeList {
 	var inodeList = NewINodeList("FULL_LIST")
 
@@ -328,7 +328,7 @@ func (sysTable *SysTableSpace) GetSegINodeFullList() *INodeList {
 	return inodeList
 }
 
-//至少存在一个空闲Inode Entry的Inode Page被放到该链表上
+// 至少存在一个空闲Inode Entry的Inode Page被放到该链表上
 func (sysTable *SysTableSpace) GetSegINodeFreeList() *INodeList {
 	var inodeList = NewINodeList("FREE_LIST")
 
@@ -353,7 +353,7 @@ func (sysTable *SysTableSpace) GetSegINodeFreeList() *INodeList {
 	return inodeList
 }
 
-//获取所有FreeExtent链表
+// 获取所有FreeExtent链表
 func (sysTable *SysTableSpace) GetFspFreeExtentList() *ExtentList {
 
 	var extentList = NewExtentList("FREE_EXTENT")
@@ -512,7 +512,7 @@ func (sysTable *SysTableSpace) GetFspFreeExtentList() *ExtentList {
 	return extentList
 }
 
-//获取所有的FreeFragExtent
+// 获取所有的FreeFragExtent
 func (sysTable *SysTableSpace) GetFspFreeFragExtentList() *ExtentList {
 	var extentList = NewExtentList("FREE_FRAG")
 
@@ -677,8 +677,7 @@ func (sysTable *SysTableSpace) GetFspFreeFragExtentList() *ExtentList {
 	return extentList
 }
 
-//获取所有的FullFragExtent
-//
+// 获取所有的FullFragExtent
 func (sysTable *SysTableSpace) GetFspFullFragExtentList() *ExtentList {
 	var extentList = NewExtentList("FULL_FRAG")
 	bufferBlockFsp := sysTable.pool.GetPageBlock(0, 0)

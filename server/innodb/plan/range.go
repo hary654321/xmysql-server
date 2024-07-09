@@ -16,14 +16,14 @@ package plan
 import (
 	"fmt"
 
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
 	"sort"
+	types "xmysql-server/server/innodb/basic"
 
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/ast"
+	"xmysql-server/server/innodb/ast"
 
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/expression"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/sessionctx/variable"
+	"xmysql-server/server/innodb/expression"
+	"xmysql-server/server/innodb/sessionctx/variable"
 )
 
 type rangePoint struct {

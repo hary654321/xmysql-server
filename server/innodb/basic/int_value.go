@@ -1,8 +1,8 @@
 package basic
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/util"
 	"strconv"
+	"xmysql-server/util"
 )
 
 type IntValue struct {

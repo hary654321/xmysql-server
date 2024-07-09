@@ -1,8 +1,8 @@
 package pages
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/util"
+	"xmysql-server/server/common"
+	"xmysql-server/util"
 )
 
 type FileSpaceHeader struct {
@@ -61,7 +61,7 @@ func (fsh *FileSpaceHeader) GetSerializeBytes() []byte {
 	return buff
 }
 
-//获取文件页面数
+// 获取文件页面数
 func (f *FileSpaceHeader) GetFilePages() uint32 {
 
 	return util.ReadUB4Byte2UInt32(f.Size)
@@ -106,17 +106,17 @@ type FspHrdBinaryPage struct {
 
 }
 
-//创建Fsp
-//也就是RootPage
+// 创建Fsp
+// 也就是RootPage
 //
-//FSP_SIZE：表空间大小，以Page数量计算
-//FSP_FREE_LIMIT：目前在空闲的Extent上最小的尚未被初始化的Page的`Page Number
-//FSP_FREE：空闲extent链表，链表中的每一项为代表extent的xdes，所谓空闲extent是指该extent内所有page均未被使用
-//FSP_FREE_FRAG：free frag extent链表，链表中的每一项为代表extent的xdes，所谓free frag extent是指该extent内有部分page未被使用
-//FSP_FULL_FRAG：full frag extent链表，链表中的每一项为代表extent的xdes，所谓full frag extent是指该extent内所有Page均已被使用
-//FSP_SEG_ID：下次待分配的segment id，每次分配新segment时均会使用该字段作为segment id，并将该字段值+1写回
-//FSP_SEG_INODES_FULL：full inode page链表，链表中的每一项为inode page，该链表中的每个inode page内的inode entry都已经被使用
-//FSP_SEG_INODES_FREE：free inode page链表，链表中的每一项为inode page，该链表中的每个inode page内上有空闲inode entry可分配
+// FSP_SIZE：表空间大小，以Page数量计算
+// FSP_FREE_LIMIT：目前在空闲的Extent上最小的尚未被初始化的Page的`Page Number
+// FSP_FREE：空闲extent链表，链表中的每一项为代表extent的xdes，所谓空闲extent是指该extent内所有page均未被使用
+// FSP_FREE_FRAG：free frag extent链表，链表中的每一项为代表extent的xdes，所谓free frag extent是指该extent内有部分page未被使用
+// FSP_FULL_FRAG：full frag extent链表，链表中的每一项为代表extent的xdes，所谓full frag extent是指该extent内所有Page均已被使用
+// FSP_SEG_ID：下次待分配的segment id，每次分配新segment时均会使用该字段作为segment id，并将该字段值+1写回
+// FSP_SEG_INODES_FULL：full inode page链表，链表中的每一项为inode page，该链表中的每个inode page内的inode entry都已经被使用
+// FSP_SEG_INODES_FREE：free inode page链表，链表中的每一项为inode page，该链表中的每个inode page内上有空闲inode entry可分配
 func NewFspHrdPage(spaceId uint32) *FspHrdBinaryPage {
 	var fileHeader = new(FileHeader)
 	//写入FSP文件头
@@ -169,7 +169,7 @@ func (fspHrdPage *FspHrdBinaryPage) GetSerializeBytes() []byte {
 	return fspHrdPage.SerializeBytes()
 }
 
-//获取下一个ID
+// 获取下一个ID
 func (fspHrdPage *FspHrdBinaryPage) GetNextSegmentId() []byte {
 
 	return fspHrdPage.FileSpaceHeader.NextUnusedSegmentId

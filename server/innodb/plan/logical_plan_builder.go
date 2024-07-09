@@ -15,20 +15,20 @@ package plan
 
 import (
 	"fmt"
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/schemas"
 	"strings"
 	"unicode"
+	types "xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/schemas"
 
 	"github.com/cznic/mathutil"
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/ast"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/expression"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/expression/aggregation"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/model"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/parser"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/sessionctx/variable"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
+	"xmysql-server/server/innodb/ast"
+	"xmysql-server/server/innodb/expression"
+	"xmysql-server/server/innodb/expression/aggregation"
+	"xmysql-server/server/innodb/model"
+	"xmysql-server/server/innodb/parser"
+	"xmysql-server/server/innodb/sessionctx/variable"
+	"xmysql-server/server/mysql"
 )
 
 const (
@@ -316,9 +316,10 @@ func (b *planBuilder) buildUsingClause(p *LogicalJoin, leftPlan, rightPlan Logic
 // buildNaturalJoin build natural join output schema. It find out all the common columns
 // then using the same mechanism as buildUsingClause to eliminate redundant columns and build join conditions.
 // According to standard SQL, producing this display order:
-// 	All the common columns
-// 	Every column in the first (left) table that is not a common column
-// 	Every column in the second (right) table that is not a common column
+//
+//	All the common columns
+//	Every column in the first (left) table that is not a common column
+//	Every column in the second (right) table that is not a common column
 func (b *planBuilder) buildNaturalJoin(p *LogicalJoin, leftPlan, rightPlan LogicalPlan, join *ast.Join) error {
 	return b.coalesceCommonColumns(p, leftPlan, rightPlan, join.Tp == ast.RightJoin, nil)
 }

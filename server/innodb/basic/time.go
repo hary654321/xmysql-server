@@ -25,9 +25,9 @@ import (
 
 	"github.com/juju/errors"
 	log "github.com/sirupsen/logrus"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/sessionctx/variable"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/terror"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
+	"xmysql-server/server/innodb/sessionctx/variable"
+	"xmysql-server/server/innodb/terror"
+	"xmysql-server/server/mysql"
 )
 
 // Portable analogs of some common call errors.
@@ -420,18 +420,17 @@ func RoundFrac(t gotime.Time, fsp int) (gotime.Time, error) {
 
 // ToPackedUint encodes Time to a packed uint64 value.
 //
-//    1 bit  0
-//   17 bits year*13+month   (year 0-9999, month 0-12)
-//    5 bits day             (0-31)
-//    5 bits hour            (0-23)
-//    6 bits minute          (0-59)
-//    6 bits second          (0-59)
-//   24 bits microseconds    (0-999999)
+//	 1 bit  0
+//	17 bits year*13+month   (year 0-9999, month 0-12)
+//	 5 bits day             (0-31)
+//	 5 bits hour            (0-23)
+//	 6 bits minute          (0-59)
+//	 6 bits second          (0-59)
+//	24 bits microseconds    (0-999999)
 //
-//   Total: 64 bits = 8 bytes
+//	Total: 64 bits = 8 bytes
 //
-//   0YYYYYYY.YYYYYYYY.YYdddddh.hhhhmmmm.mmssssss.ffffffff.ffffffff.ffffffff
-//
+//	0YYYYYYY.YYYYYYYY.YYdddddh.hhhhmmmm.mmssssss.ffffffff.ffffffff.ffffffff
 func (t Time) ToPackedUint() (uint64, error) {
 	tm := t.Time
 	if t.IsZero() {
@@ -787,7 +786,7 @@ type Duration struct {
 	Fsp int
 }
 
-//Add adds d to d, returns a duration value.
+// Add adds d to d, returns a duration value.
 func (d Duration) Add(v Duration) (Duration, error) {
 	if &v == nil {
 		return d, nil
@@ -2454,7 +2453,7 @@ func monthNumeric(t *mysqlTime, input string, ctx map[string]int) (string, bool)
 	return rem, false
 }
 
-//  dayOfMonthWithSuffix returns different suffix according t being which day. i.e. 0 return th. 1 return st.
+// dayOfMonthWithSuffix returns different suffix according t being which day. i.e. 0 return th. 1 return st.
 func dayOfMonthWithSuffix(t *mysqlTime, input string, ctx map[string]int) (string, bool) {
 	month, remain := parseOrdinalNumbers(input)
 	if month >= 0 {

@@ -18,8 +18,8 @@
 package tables
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/model"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/schemas"
+	"xmysql-server/server/innodb/model"
+	"xmysql-server/server/innodb/schemas"
 )
 
 type Table struct {

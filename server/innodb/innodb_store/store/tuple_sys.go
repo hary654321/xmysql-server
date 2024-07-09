@@ -1,9 +1,9 @@
 package store
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/tuple"
 	"strings"
+	"xmysql-server/server/common"
+	"xmysql-server/server/innodb/tuple"
 )
 
 type SysTableTuple struct {
@@ -42,9 +42,11 @@ func (s *SysTableTuple) GetColumnInfos(index byte) *tuple.FormColumnsWrapper {
 	return s.Columns[index]
 }
 
-/**
+/*
+*
 获取可变长度变量列表
-**/
+*
+*/
 func (s *SysTableTuple) GetVarColumns() []*tuple.FormColumnsWrapper {
 	var formColumnsWrapperCols = make([]*tuple.FormColumnsWrapper, 0)
 	for i := 0; i < len(s.Columns); i++ {
@@ -557,7 +559,7 @@ func NewSysColumnsTupleWithFlags(typeFlags string) tuple.TableRowTuple {
 	}
 }
 
-//SysIndex tableId 和IndexId为联合主键
+// SysIndex tableId 和IndexId为联合主键
 func NewSysIndexTuple() tuple.TableRowTuple {
 	var sysTableTuple = new(SysTableTuple)
 	sysTableTuple.TableName = common.INNODB_SYS_INDEXES
@@ -1101,7 +1103,7 @@ func NewSysSpacesTupleWithFlags(typeFlags string) tuple.TableRowTuple {
 	}
 }
 
-//datafile文件元祖
+// datafile文件元祖
 func NewSysDataFilesTuple() tuple.TableRowTuple {
 	var sysTableTuple = new(SysTableTuple)
 	sysTableTuple.TableName = common.INNODB_SYS_DATAFILES

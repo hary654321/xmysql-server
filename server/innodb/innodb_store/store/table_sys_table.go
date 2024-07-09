@@ -1,17 +1,17 @@
 package store
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/buffer_pool"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/model"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/schemas"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/tuple"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
-	"github.com/zhukovaskychina/xmysql-server/util"
+	"xmysql-server/server/common"
+	"xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/buffer_pool"
+	"xmysql-server/server/innodb/model"
+	"xmysql-server/server/innodb/schemas"
+	"xmysql-server/server/innodb/tuple"
+	"xmysql-server/server/mysql"
+	"xmysql-server/util"
 )
 
-//INNODB_SYS_TABLES
+// INNODB_SYS_TABLES
 type MemoryInnodbSysTable struct {
 	//系统表元祖信息
 	TableTuple tuple.TableRowTuple
@@ -203,8 +203,8 @@ func (m MemoryInnodbSysColumns) RowIter() (basic.RowIterator, error) {
 	return NewMemoryIterator(m.sysTableIterator), nil
 }
 
-//根据Name做主键索引
-//spaceId 由数据字典管理
+// 根据Name做主键索引
+// spaceId 由数据字典管理
 type MemoryInnodbTableSpaces struct {
 	TableTuple    tuple.TableRowTuple
 	internalTuple tuple.TableRowTuple
@@ -297,7 +297,7 @@ func (m MemoryInnodbTableSpaces) RowIter() (basic.RowIterator, error) {
 	panic("implement me")
 }
 
-//space spaceId作为主键
+// space spaceId作为主键
 func NewMemoryInnodbDataFiles(rootPage uint32, indexName string, pool *buffer_pool.BufferPool) schemas.Table {
 
 	var memoryInnodbDataFiles = new(MemoryInnodbDataFiles)

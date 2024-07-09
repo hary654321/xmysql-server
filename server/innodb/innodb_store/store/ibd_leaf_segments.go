@@ -1,14 +1,14 @@
 package store
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/buffer_pool"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/innodb_store/store/storebytes/segs"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/tuple"
-	"github.com/zhukovaskychina/xmysql-server/util"
+	"xmysql-server/server/common"
+	"xmysql-server/server/innodb/buffer_pool"
+	"xmysql-server/server/innodb/innodb_store/store/storebytes/segs"
+	"xmysql-server/server/innodb/tuple"
+	"xmysql-server/util"
 )
 
-//必须先从segment内分配extent和page，创建segment核心是从inode page 中分配空闲的inode
+// 必须先从segment内分配extent和page，创建segment核心是从inode page 中分配空闲的inode
 // u
 // 段空间，叶子，非叶子,rollback,undo
 // 每个索引有两个segment，一个leaf，一个non-leaf
@@ -113,7 +113,7 @@ func (d *DataSegment) GetSegmentHeader() *segs.SegmentHeader {
 	return d.SegmentHeader
 }
 
-//叶子段，非不定长
+// 叶子段，非不定长
 func NewDataSegmentWithTableSpaceAtInit(spaceId uint32, pageNumber uint32, offset uint16, indexName string, space TableSpace) Segment {
 	var segment = new(DataSegment)
 	segment.SegmentHeader = segs.NewSegmentHeader(spaceId, pageNumber, offset)
@@ -127,9 +127,9 @@ func NewDataSegmentWithTableSpaceAtInit(spaceId uint32, pageNumber uint32, offse
 	return segment
 }
 
-//申请extent之前，
-//在开始向表中插入数据的时候，段是从某个碎片区以某个页面为单位来分配
-//当某个段已经占用了32个碎片区后，就会以完整的区为单位来申请分配空间
+// 申请extent之前，
+// 在开始向表中插入数据的时候，段是从某个碎片区以某个页面为单位来分配
+// 当某个段已经占用了32个碎片区后，就会以完整的区为单位来申请分配空间
 func (d *DataSegment) AllocateNewExtent() Extent {
 	currentExtent := d.currentTableSpace.GetFspFreeExtentList().DequeFirstElement()
 	d.inode.GetFreeExtentList()
@@ -143,13 +143,13 @@ func (d *DataSegment) GetNotFullNUsedSize() uint32 {
 	panic("implement me")
 }
 
-//获取所有FreeExtent链表
+// 获取所有FreeExtent链表
 func (d *DataSegment) GetFreeExtentList() *ExtentList {
 	var extentList = d.inode.SegFreeExtentMap[d.segmentId]
 	return extentList
 }
 
-//获取所有FULLExtent链表
+// 获取所有FULLExtent链表
 func (d *DataSegment) GetFullExtentList() *ExtentList {
 	var extentList = d.inode.SegFullExtentMap[d.segmentId]
 	return extentList

@@ -1,8 +1,8 @@
 package pages
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/util"
+	"xmysql-server/server/common"
+	"xmysql-server/util"
 )
 
 const BYTES_0 = 0
@@ -13,8 +13,8 @@ const BYTES_1024 = 2
 
 const BYTES_2048 = 3
 
-//等待实现
-//BitMap
+// 等待实现
+// BitMap
 type IBufBitMapPage struct {
 	AbstractPage
 	ChangeBufferBitMap []byte //8192 byte，每4个bit表示一个页面，即管理一个页面，也就是该bitmap下面的16384个页面

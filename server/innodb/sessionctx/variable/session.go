@@ -15,12 +15,12 @@ package variable
 
 import (
 	"crypto/tls"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/terror"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/util/auth"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
 	"math"
 	"sync"
 	"time"
+	"xmysql-server/server/innodb/terror"
+	"xmysql-server/server/innodb/util/auth"
+	"xmysql-server/server/mysql"
 )
 
 const (

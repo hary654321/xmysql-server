@@ -15,13 +15,13 @@ package basic
 
 import (
 	"fmt"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic/json"
 	"strconv"
 	"strings"
+	"xmysql-server/server/innodb/basic/json"
 
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/util/charset"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/util/format"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
+	"xmysql-server/server/innodb/util/charset"
+	"xmysql-server/server/innodb/util/format"
+	"xmysql-server/server/mysql"
 )
 
 // UnspecifiedLength is unspecified length.

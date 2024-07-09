@@ -2,12 +2,13 @@ package store
 
 import (
 	"fmt"
-	"github.com/smartystreets/assertions"
-	"github.com/zhukovaskychina/xmysql-server/server/conf"
 	"testing"
+	"xmysql-server/server/conf"
+
+	"github.com/smarty/assertions"
 )
 
-//测试256Extent
+// 测试256Extent
 func TestFsp(t *testing.T) {
 
 	t.Parallel()

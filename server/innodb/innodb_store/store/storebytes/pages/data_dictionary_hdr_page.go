@@ -1,10 +1,10 @@
 package pages
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/innodb_store/store/storebytes/segs"
+	"xmysql-server/server/common"
+	"xmysql-server/server/innodb/innodb_store/store/storebytes/segs"
 
-	"github.com/zhukovaskychina/xmysql-server/util"
+	"xmysql-server/util"
 )
 
 type DataDictHeader struct {
@@ -20,7 +20,7 @@ type DataDictHeader struct {
 	SysFieldsRootPage    []byte //4
 }
 
-//数据字典头部信息
+// 数据字典头部信息
 type DataDictionaryHeaderSysPage struct {
 	AbstractPage
 

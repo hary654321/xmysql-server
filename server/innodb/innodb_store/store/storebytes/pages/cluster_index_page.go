@@ -1,11 +1,12 @@
 package pages
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/util"
+	"xmysql-server/server/common"
+	"xmysql-server/util"
 )
 
-/**
+/*
+*
 
 名称 			大小（单位：bit）		描述
 预留位1 			1 					没有使用
@@ -17,8 +18,8 @@ heap_no 		13		 			表示当前记录在记录堆的位置信息
 record_type 	3 					表示当前记录的类型， 0 表示普通记录， 1 表示B+树非叶子节点记录， 2 表示最小记录， 3表示最大记录
 next_record 	16 					表示下一条记录的相对位置
 
-
-**/
+*
+*/
 var (
 	INFIMUM_SURERMUM_COMPACT = []byte{
 		/* the infimum record */
@@ -159,7 +160,7 @@ func (ph *PageHeader) parsePageHeader(buff []byte) {
 	ph.PageBtrSegTop = buff[46:56]   //B+树中非叶子节点端的头部信息，尽在B+树中的跟页面中定义
 }
 
-//用于实现存储主键索引的数据
+// 用于实现存储主键索引的数据
 type IndexPage struct {
 	AbstractPage
 	PageHeader      PageHeader
@@ -238,12 +239,12 @@ func (ip *IndexPage) ParsePageSlots(content []byte) {
 
 }
 
-//infimum最小槽位
-//supermum最大槽位
-//其他槽位每一个槽位数量为4-8个，不得超过8个记录
-//槽位的最大是最大值的槽位
-//最大槽位的最后一个值为supermum
-//pageDirectory 应该是slotrows数组的大小
+// infimum最小槽位
+// supermum最大槽位
+// 其他槽位每一个槽位数量为4-8个，不得超过8个记录
+// 槽位的最大是最大值的槽位
+// 最大槽位的最后一个值为supermum
+// pageDirectory 应该是slotrows数组的大小
 func (ip *IndexPage) ParseUserRecordsAndFreeSpace(content []byte) {
 	pageDirLength := len(ip.PageDirectory)
 

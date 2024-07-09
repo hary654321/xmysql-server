@@ -1,13 +1,12 @@
 package innodb
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/ast"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
 	"time"
+	"xmysql-server/server/innodb/ast"
+	"xmysql-server/server/innodb/context"
+	"xmysql-server/server/mysql"
 )
 
-//
 type MySQLServerSession interface {
 
 	//获得当前链接最后一次活跃的时间

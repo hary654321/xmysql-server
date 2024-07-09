@@ -2,10 +2,10 @@ package aggregation
 
 import (
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/sessionctx/variable"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/util/codec"
+	"xmysql-server/server/innodb/sessionctx/variable"
+	"xmysql-server/server/innodb/util/codec"
 
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
+	types "xmysql-server/server/innodb/basic"
 )
 
 // distinctChecker stores existing keys and checks if given data is distinct.

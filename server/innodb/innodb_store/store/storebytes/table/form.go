@@ -1,8 +1,8 @@
 package table
 
 import (
-	_ "github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/util"
+	_ "xmysql-server/server/common"
+	"xmysql-server/util"
 )
 
 const (
@@ -17,7 +17,8 @@ const (
 	colKey
 )
 
-/**
+/*
+*
 *  0x0100
 auto_increment_offset表示自增长字段从那个数开始，他的取值范围是1 .. 65535
 auto_increment_increment表示自增长字段每次递增的量，其默认值是1，取值范围是1 .. 65535

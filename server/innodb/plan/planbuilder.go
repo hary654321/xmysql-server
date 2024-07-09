@@ -15,19 +15,19 @@ package plan
 
 import (
 	"fmt"
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
 	"strings"
+	types "xmysql-server/server/innodb/basic"
 
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/ast"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/expression"
+	"xmysql-server/server/innodb/ast"
+	"xmysql-server/server/innodb/context"
+	"xmysql-server/server/innodb/expression"
 
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/model"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/parser/opcode"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/schemas"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/terror"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
+	"xmysql-server/server/innodb/model"
+	"xmysql-server/server/innodb/parser/opcode"
+	"xmysql-server/server/innodb/schemas"
+	"xmysql-server/server/innodb/terror"
+	"xmysql-server/server/mysql"
 )
 
 // Error instances.

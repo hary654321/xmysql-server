@@ -21,7 +21,7 @@ import (
 
 	"github.com/juju/errors"
 	log "github.com/sirupsen/logrus"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
+	"xmysql-server/server/mysql"
 )
 
 // Global error instances.

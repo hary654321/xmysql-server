@@ -2,17 +2,17 @@ package store
 
 import (
 	"fmt"
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/server/conf"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/buffer_pool"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/model"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/schemas"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/tuple"
-	"github.com/zhukovaskychina/xmysql-server/util"
 	"io/ioutil"
 	"path"
 	"strings"
+	"xmysql-server/server/common"
+	"xmysql-server/server/conf"
+	"xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/buffer_pool"
+	"xmysql-server/server/innodb/model"
+	"xmysql-server/server/innodb/schemas"
+	"xmysql-server/server/innodb/tuple"
+	"xmysql-server/util"
 )
 
 type InfoSchemaManager struct {
@@ -93,7 +93,7 @@ func (i *InfoSchemaManager) initSysSchemas() {
 
 }
 
-//mysql 不管是啥，在硬盘上创建文件夹，mysql会认为是数据库
+// mysql 不管是啥，在硬盘上创建文件夹，mysql会认为是数据库
 func (i *InfoSchemaManager) loadDatabase() {
 	dataDir := i.conf.DataDir
 	fs, errors := ioutil.ReadDir(dataDir)

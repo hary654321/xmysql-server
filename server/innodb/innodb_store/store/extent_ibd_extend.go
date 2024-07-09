@@ -1,9 +1,9 @@
 package store
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/buffer_pool"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/tuple"
+	"xmysql-server/server/common"
+	"xmysql-server/server/innodb/buffer_pool"
+	"xmysql-server/server/innodb/tuple"
 )
 
 /////////////////////////////////////////////////////////////
@@ -32,12 +32,12 @@ type Extent interface {
 	SetExtentState(xdesState common.XDES_STATE)
 }
 
-//每个区有64个page
-//每次生成一个区就有64个页面
-//第一个区有Fsp,BitMap,Inode，管理包括他自身的25
-//Inode会有多个
-//第一个区，分为系统表空间和一般表空间
-//系统表空间有多个
+// 每个区有64个page
+// 每次生成一个区就有64个页面
+// 第一个区有Fsp,BitMap,Inode，管理包括他自身的25
+// Inode会有多个
+// 第一个区，分为系统表空间和一般表空间
+// 系统表空间有多个
 type PrimaryExtent struct {
 	IsInit           bool
 	fspHrdBinaryPage *Fsp         //FileSpace Header,用于存储表空间的元数据信息，
@@ -90,8 +90,8 @@ func (firstIBDExtent *PrimaryExtent) LoadIPageWrapper(wrapper []uint32) {
 	firstIBDExtent.Pages = append(firstIBDExtent.Pages, wrapper...)
 }
 
-//判断当前区是否满了
-//第一个区无所谓段
+// 判断当前区是否满了
+// 第一个区无所谓段
 func (firstIBDExtent *PrimaryExtent) IsFull() bool {
 	return firstIBDExtent.fspHrdBinaryPage.xdesEntryMap[0].XDesState == common.XDES_FULL_FRAG
 }
@@ -100,7 +100,7 @@ func (firstIBDExtent *PrimaryExtent) GetExtentId() uint32 {
 	return 0
 }
 
-//释放页面，由用过页面变为allocated
+// 释放页面，由用过页面变为allocated
 func (firstIBDExtent *PrimaryExtent) FreePage(pageNumber uint32) {
 	firstIBDExtent.XDESEntryWrapper.XdesDescPageMap[byte(pageNumber)] = true
 	buff := NewAllocatedPage(pageNumber).ToByte()
@@ -171,8 +171,7 @@ func (firstIBDExtent *PrimaryExtent) SetExtentState(xdesState common.XDES_STATE)
 	firstIBDExtent.extentState = xdesState
 }
 
-//其他区，以及该区管理的64个页面
-//
+// 其他区，以及该区管理的64个页面
 type OrdinaryExtent struct {
 	isInit           bool
 	ExtentNumber     uint32   //区的首个页面号码，会管理后面64个页面
@@ -263,9 +262,9 @@ func (o *OrdinaryExtent) SetExtentState(xdesState common.XDES_STATE) {
 	o.XDESEntryWrapper.XDesState = xdesState
 }
 
-//其他区XdesPage,BufBitMap
-//fsp 是特殊的fsp
-//区只是存储在内存当中
+// 其他区XdesPage,BufBitMap
+// fsp 是特殊的fsp
+// 区只是存储在内存当中
 // 第二个header 记录257-512个区
 type SecondaryPrimaryExtent struct {
 	XDesPage  *XDesPageWrapper

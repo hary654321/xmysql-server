@@ -3,11 +3,11 @@ package store
 import (
 	"bytes"
 	"encoding/binary"
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/tuple"
-	"github.com/zhukovaskychina/xmysql-server/util"
 	"strings"
+	"xmysql-server/server/common"
+	"xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/tuple"
+	"xmysql-server/util"
 )
 
 /***
@@ -169,7 +169,7 @@ func (cld *SecondaryInternalRowData) ReadBytesWithNullWithPosition(index int) []
 	return cld.Content[0+5*index : 5*index+5][0:4]
 }
 
-//大致为  页面号/主键
+// 大致为  页面号/主键
 type SecondaryInternalRow struct {
 	basic.Row
 	header    basic.FieldDataHeader

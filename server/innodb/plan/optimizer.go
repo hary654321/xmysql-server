@@ -14,16 +14,16 @@
 package plan
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/schemas"
 	"math"
+	"xmysql-server/server/innodb/schemas"
 
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/ast"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/expression"
+	"xmysql-server/server/innodb/ast"
+	"xmysql-server/server/innodb/context"
+	"xmysql-server/server/innodb/expression"
 
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/terror"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
+	"xmysql-server/server/innodb/terror"
+	"xmysql-server/server/mysql"
 )
 
 // AllowCartesianProduct means whether tidb allows cartesian join without equal conditions.

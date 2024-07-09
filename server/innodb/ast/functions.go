@@ -14,8 +14,8 @@
 package ast
 
 import (
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/model"
+	types "xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/model"
 )
 
 var (

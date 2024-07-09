@@ -14,8 +14,8 @@
 package ast
 
 import (
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/model"
+	types "xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/model"
 )
 
 var (
@@ -272,10 +272,12 @@ func (n *ColumnOption) Accept(v Visitor) (Node, bool) {
 }
 
 // IndexOption is the index options.
-//    KEY_BLOCK_SIZE [=] value
-//  | index_type
-//  | WITH PARSER parser_name
-//  | COMMENT 'string'
+//
+//	  KEY_BLOCK_SIZE [=] value
+//	| index_type
+//	| WITH PARSER parser_name
+//	| COMMENT 'string'
+//
 // See http://dev.mysql.com/doc/refman/5.7/en/create-table.html
 type IndexOption struct {
 	node

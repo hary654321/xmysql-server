@@ -14,21 +14,21 @@
 package plan
 
 import (
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/schemas"
 	"strings"
+	types "xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/schemas"
 
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/ast"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/expression"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/expression/aggregation"
+	"xmysql-server/server/innodb/ast"
+	"xmysql-server/server/innodb/context"
+	"xmysql-server/server/innodb/expression"
+	"xmysql-server/server/innodb/expression/aggregation"
 
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/model"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/parser/opcode"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/sessionctx/variable"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/sessionctx/varsutil"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
+	"xmysql-server/server/innodb/model"
+	"xmysql-server/server/innodb/parser/opcode"
+	"xmysql-server/server/innodb/sessionctx/variable"
+	"xmysql-server/server/innodb/sessionctx/varsutil"
+	"xmysql-server/server/mysql"
 )
 
 // EvalSubquery evaluates incorrelated subqueries once.
@@ -142,12 +142,16 @@ func popRowArg(ctx context.Context, e expression.Expression) (ret expression.Exp
 // 1. If op are EQ or NE or NullEQ, constructBinaryOpFunctions converts (a0,a1,a2) op (b0,b1,b2) to (a0 op b0) and (a1 op b1) and (a2 op b2)
 // 2. If op are LE or GE, constructBinaryOpFunctions converts (a0,a1,a2) op (b0,b1,b2) to
 // `IF( (a0 op b0) EQ 0, 0,
-//      IF ( (a1 op b1) EQ 0, 0, a2 op b2))`
+//
+//	IF ( (a1 op b1) EQ 0, 0, a2 op b2))`
+//
 // 3. If op are LT or GT, constructBinaryOpFunctions converts (a0,a1,a2) op (b0,b1,b2) to
 // `IF( a0 NE b0, a0 op b0,
-//      IF( a1 NE b1,
-//          a1 op b1,
-//          a2 op b2)
+//
+//	IF( a1 NE b1,
+//	    a1 op b1,
+//	    a2 op b2)
+//
 // )`
 func (er *expressionRewriter) constructBinaryOpFunction(l expression.Expression, r expression.Expression, op string) (expression.Expression, error) {
 	lLen, rLen := getRowLen(l), getRowLen(r)

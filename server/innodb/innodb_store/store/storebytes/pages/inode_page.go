@@ -1,8 +1,8 @@
 package pages
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/util"
+	"xmysql-server/server/common"
+	"xmysql-server/util"
 )
 
 //go:generate mockgen -source=inode_page.go -destination ./inode_page_mock.go -package pages
@@ -14,7 +14,7 @@ import (
 	"fmt"
 )
 
-//实现INODE
+// 实现INODE
 type INodePage struct {
 	AbstractPage
 	INodePageList DESListNode   //12 byte 存储上一个和下一个INode的页面指针 38-50
@@ -31,8 +31,8 @@ func (fragmentArray FragmentArrayEntry) Byte() []byte {
 	return fragmentArray.PageNo
 }
 
-//192个字节
-//管理了85个段
+// 192个字节
+// 管理了85个段
 type INodeEntry struct {
 	SegmentId           []byte               //8个字节，该结构体对应的段的编号（ID） 若值为0，则表示该SLot未被使用
 	NotFullNUsed        []byte               //4个字节，在Notfull链表中已经使用了多少个页面
@@ -43,8 +43,8 @@ type INodeEntry struct {
 	FragmentArrayEntry  []FragmentArrayEntry //一共32个array，每个ArrayEntry为零散的页面号
 }
 
-//每当创建一个新的索引，构建一个新的Btree，先为非叶子节点的额segment段分配一个inodeentry，再创建一个rootpage，
-//并将该色门头的位置记录到rootpage中，然后再分配leafsegment的inode entry，并记录到rootpage中
+// 每当创建一个新的索引，构建一个新的Btree，先为非叶子节点的额segment段分配一个inodeentry，再创建一个rootpage，
+// 并将该色门头的位置记录到rootpage中，然后再分配leafsegment的inode entry，并记录到rootpage中
 func NewINodeEntry(SegmentId uint64) *INodeEntry {
 	framentArray := make([]FragmentArrayEntry, 32)
 	for i := 0; i < 32; i++ {
@@ -62,7 +62,7 @@ func NewINodeEntry(SegmentId uint64) *INodeEntry {
 	}
 }
 
-//判断当前段的离散区间是否满了
+// 判断当前段的离散区间是否满了
 func (ientry *INodeEntry) FragmentArrayIsFull() bool {
 	for _, v := range ientry.FragmentArrayEntry {
 		if util.ReadUB4Byte2UInt32(v.PageNo) == 0 {

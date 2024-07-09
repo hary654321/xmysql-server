@@ -14,7 +14,7 @@
 package expression
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/ast"
+	"xmysql-server/server/innodb/ast"
 )
 
 // UnCacheableFunctions stores functions which can not be cached to plan cache.

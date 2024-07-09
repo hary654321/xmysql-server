@@ -14,12 +14,12 @@
 package ast
 
 import (
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
 	"regexp"
+	types "xmysql-server/server/innodb/basic"
 
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/model"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/parser/opcode"
+	"xmysql-server/server/innodb/context"
+	"xmysql-server/server/innodb/model"
+	"xmysql-server/server/innodb/parser/opcode"
 )
 
 var (

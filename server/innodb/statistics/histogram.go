@@ -20,12 +20,12 @@ import (
 	"strings"
 
 	"github.com/juju/errors"
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/model"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/sessionctx/variable"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/terror"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/util/codec"
+	types "xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/context"
+	"xmysql-server/server/innodb/model"
+	"xmysql-server/server/innodb/sessionctx/variable"
+	"xmysql-server/server/innodb/terror"
+	"xmysql-server/server/innodb/util/codec"
 )
 
 // Histogram represents statistics for a column or index.
@@ -47,7 +47,6 @@ type Histogram struct {
 // A bucket value is the greatest item value stored in the bucket.
 //
 // Repeat is the number of repeats of the bucket value, it can be used to find popular values.
-//
 type Bucket struct {
 	Count        int64
 	UpperBound   types.Datum

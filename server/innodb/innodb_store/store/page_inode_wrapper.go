@@ -1,20 +1,20 @@
 package store
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/buffer_pool"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/innodb_store/store/storebytes/pages"
+	"xmysql-server/server/common"
+	"xmysql-server/server/innodb/buffer_pool"
+	"xmysql-server/server/innodb/innodb_store/store/storebytes/pages"
 )
-import "github.com/zhukovaskychina/xmysql-server/util"
+import "xmysql-server/util"
 
-//TODO 这里需要加强对重启的后复盘操作
-//用于管理数据文件中的segment,用于存储各种INodeEntry
-//第三个page的类型FIL_PAGE_INODE
-//每个Inode页面可以存储85个记录，
-//PreNodePageNumber  []byte //4个字节	表示指向前一个INode页面号
-//PreNodeOffset      []byte //2个字节 65536-1
-//NextNodePageNumber []byte //4个字节  表示指向后一个INode页面号
-//NextNodeOffSet     []byte //2个字节	65536-1
+// TODO 这里需要加强对重启的后复盘操作
+// 用于管理数据文件中的segment,用于存储各种INodeEntry
+// 第三个page的类型FIL_PAGE_INODE
+// 每个Inode页面可以存储85个记录，
+// PreNodePageNumber  []byte //4个字节	表示指向前一个INode页面号
+// PreNodeOffset      []byte //2个字节 65536-1
+// NextNodePageNumber []byte //4个字节  表示指向后一个INode页面号
+// NextNodeOffSet     []byte //2个字节	65536-1
 type INode struct {
 	//IPageWrapper
 	INodePage          *pages.INodePage
@@ -128,7 +128,7 @@ func (iNode *INode) getCloseZeroSeg() int {
 	return result
 }
 
-//根据
+// 根据
 func (iNode *INode) GetInodeEntryBySegmentId(segmentId uint64) (*pages.INodeEntry, bool) {
 
 	for _, v := range iNode.INodePage.INodeEntries {
@@ -151,7 +151,7 @@ func (iNode *INode) GetINodeRootPageBySegId(segmentId uint64) (uint32, bool) {
 	return 0, false
 }
 
-//获取所有FreeExtent链表
+// 获取所有FreeExtent链表
 func (iNode *INode) GetFreeExtentList() {
 	var SegFreeExtentMap = make(map[uint64]*ExtentList)
 
@@ -300,7 +300,7 @@ func (iNode *INode) GetFreeExtentList() {
 	iNode.SegFreeExtentMap = SegFreeExtentMap
 }
 
-//获取所有FULLExtent链表
+// 获取所有FULLExtent链表
 func (iNode *INode) GetFullExtentList() {
 	var SegFullExtentMap = make(map[uint64]*ExtentList)
 
@@ -618,13 +618,12 @@ func (iNode *INode) GetSegmentByOffset(offset uint16, segmentType int) Segment {
 	return nil
 }
 
-//NotFullNUsed        []byte               //4个字节，在Notfull链表中已经使用了多少个页面
-//FreeListBaseNode    []byte               //16个字节，Free链表 segment上所有page均空闲的extent链表
-//NotFullListBaseNode []byte               //16个字节，NotFull链表 至少有一个page分配给当前Segment的Extent链表，全部用完时，转移到FSEG_FULL上，全部释放时，则归还给当前表空间FSP_FREE链表
-//FullListBaseNode    []byte               //16个字节，Full链表 segment上page被完全使用的extent链表
-//MagicNumber         []byte               //4个字节 0x5D669D2
-//FragmentArrayEntry  []FragmentArrayEntry //一共32个array，每个ArrayEntry为零散的页面号
-//
+// NotFullNUsed        []byte               //4个字节，在Notfull链表中已经使用了多少个页面
+// FreeListBaseNode    []byte               //16个字节，Free链表 segment上所有page均空闲的extent链表
+// NotFullListBaseNode []byte               //16个字节，NotFull链表 至少有一个page分配给当前Segment的Extent链表，全部用完时，转移到FSEG_FULL上，全部释放时，则归还给当前表空间FSP_FREE链表
+// FullListBaseNode    []byte               //16个字节，Full链表 segment上page被完全使用的extent链表
+// MagicNumber         []byte               //4个字节 0x5D669D2
+// FragmentArrayEntry  []FragmentArrayEntry //一共32个array，每个ArrayEntry为零散的页面号
 type INodeEntryWrapper struct {
 	wrapper IPageWrapper
 

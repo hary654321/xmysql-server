@@ -2,11 +2,12 @@ package store
 
 import (
 	"encoding/binary"
-	"github.com/smartystreets/assertions"
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/util"
 	"strings"
+	"xmysql-server/server/common"
+	"xmysql-server/server/innodb/basic"
+	"xmysql-server/util"
+
+	"github.com/smarty/assertions"
 )
 
 type InfimumRow struct {
@@ -255,20 +256,22 @@ func (ir *InfimumRow) SetNextRowOffset(offset uint16) {
 	ir.header.SetNextRecord(offset)
 }
 
-//获取当前记录在本页面中的相对位置
+// 获取当前记录在本页面中的相对位置
 func (ir *InfimumRow) GetHeapNo() uint16 {
 	return ir.header.GetHeapNo()
 }
 
-//设置该记录在
+// 设置该记录在
 func (ir *InfimumRow) SetHeapNo(heapNo uint16) {
 	ir.header.SetHeapNo(heapNo)
 }
 
-/*******
+/*
+******
 ########################################################################################################################
 
-*****/
+****
+*/
 type SupremumRow struct {
 	basic.Row
 	header basic.FieldDataHeader
@@ -435,10 +438,11 @@ func (sr *SupremumRow) Less(than basic.Row) bool {
 	return false
 }
 
-/****************
+/*
+***************
 
-
-****/
+***
+ */
 func NewSupremumRow() basic.Row {
 	var ir = new(SupremumRow)
 	ir.header = NewSupremumHeader()
@@ -514,12 +518,12 @@ func (sr *SupremumRow) GetNextRowOffset() uint16 {
 	return sr.header.GetNextRecord()
 }
 
-//获取当前记录在本页面中的相对位置
+// 获取当前记录在本页面中的相对位置
 func (sr *SupremumRow) GetHeapNo() uint16 {
 	return sr.header.GetHeapNo()
 }
 
-//设置该记录在
+// 设置该记录在
 func (sr *SupremumRow) SetHeapNo(heapNo uint16) {
 
 	sr.header.SetHeapNo(heapNo)

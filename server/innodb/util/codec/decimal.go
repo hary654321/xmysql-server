@@ -17,7 +17,7 @@ import (
 	"log"
 
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/basic"
 )
 
 // EncodeDecimal encodes a decimal d into a byte slice which can be sorted lexicographically later.

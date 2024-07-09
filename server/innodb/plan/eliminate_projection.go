@@ -15,9 +15,9 @@ package plan
 
 import (
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/expression"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/terror"
+	"xmysql-server/server/innodb/context"
+	"xmysql-server/server/innodb/expression"
+	"xmysql-server/server/innodb/terror"
 )
 
 // canProjectionBeEliminatedLoose checks whether a projection can be eliminated, returns true if

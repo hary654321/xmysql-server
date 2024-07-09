@@ -1,8 +1,8 @@
 package protocol
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
-	"github.com/zhukovaskychina/xmysql-server/util"
+	"xmysql-server/server/mysql"
+	"xmysql-server/util"
 )
 
 var (

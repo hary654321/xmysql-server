@@ -1,6 +1,6 @@
 package store
 
-import "github.com/zhukovaskychina/xmysql-server/server/innodb/innodb_store/store/storebytes/pages"
+import "xmysql-server/server/innodb/innodb_store/store/storebytes/pages"
 
 type IBuf struct {
 	IPageWrapper

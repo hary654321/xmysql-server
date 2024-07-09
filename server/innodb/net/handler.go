@@ -20,13 +20,13 @@ package net
 import (
 	"errors"
 	"fmt"
-	"github.com/zhukovaskychina/xmysql-server/server/conf"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/engine"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
-	"github.com/zhukovaskychina/xmysql-server/server/protocol"
 	"sync"
-	//"github.com/zhukovaskychina/xmysql-serverimpl/serverimpl/net/service"
+	"xmysql-server/server/conf"
+	"xmysql-server/server/innodb"
+	"xmysql-server/server/innodb/engine"
+	"xmysql-server/server/mysql"
+	"xmysql-server/server/protocol"
+	//"xmysql-serverimpl/serverimpl/net/service"
 )
 
 import (

@@ -17,9 +17,9 @@ import (
 	"regexp"
 
 	"github.com/juju/errors"
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/util/stringutil"
+	types "xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/context"
+	"xmysql-server/server/innodb/util/stringutil"
 )
 
 var (

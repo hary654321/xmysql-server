@@ -14,9 +14,9 @@
 package ast
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/model"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/util/auth"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
+	"xmysql-server/server/innodb/model"
+	"xmysql-server/server/innodb/util/auth"
+	"xmysql-server/server/mysql"
 )
 
 var (

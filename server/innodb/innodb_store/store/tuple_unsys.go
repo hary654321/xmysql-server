@@ -1,11 +1,11 @@
 package store
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/tuple"
 	"strings"
+	"xmysql-server/server/innodb/tuple"
 )
 
-//cluster 的tuple,用于反序列化
+// cluster 的tuple,用于反序列化
 type ClusterLeafTuple struct {
 	tuple.TableRowTuple
 	TableName         string

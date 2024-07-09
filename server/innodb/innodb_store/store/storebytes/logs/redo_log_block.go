@@ -1,6 +1,6 @@
 package logs
 
-import "github.com/zhukovaskychina/xmysql-server/util"
+import "xmysql-server/util"
 
 type RedoLogBlock struct {
 	LogBlockHeader  LogBlockHeader  //12byte

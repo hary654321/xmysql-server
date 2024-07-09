@@ -5,7 +5,6 @@ import (
 	"github.com/dubbogo/gost/sync"
 	"github.com/goioc/di"
 	log "github.com/sirupsen/logrus"
-	"github.com/zhukovaskychina/xmysql-server/server/conf"
 	"net"
 	"net/http"
 	"os"
@@ -13,6 +12,7 @@ import (
 	"strconv"
 	"syscall"
 	"time"
+	"xmysql-server/server/conf"
 )
 
 const (

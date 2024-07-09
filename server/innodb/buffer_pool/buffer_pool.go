@@ -2,10 +2,10 @@ package buffer_pool
 
 import (
 	"container/list"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
 	"sync"
+	"xmysql-server/server/innodb/basic"
 
-	"github.com/zhukovaskychina/xmysql-server/util"
+	"xmysql-server/util"
 )
 
 type BufferPool struct {
@@ -21,7 +21,7 @@ type BufferPool struct {
 }
 type FlushToDisk func(system basic.FileSystem, spaceId uint32, pageNo uint32, block BufferBlock)
 
-//TODO 暂时实现一个，后面再有接着实现多个buffer instance
+// TODO 暂时实现一个，后面再有接着实现多个buffer instance
 func NewBufferPool(innodbBufferPoolSize uint64, youngPercent float64, oldPercent float64, innodbOldBlocksTime int, system basic.FileSystem) *BufferPool {
 	var bufferPool = new(BufferPool)
 	bufferPool.innodbBufferPoolSize = innodbBufferPoolSize
@@ -53,7 +53,7 @@ func (bufferPool *BufferPool) GetFlushDiskList() *FlushBlockList {
 	return bufferPool.flushBlockList
 }
 
-//更新脏页面
+// 更新脏页面
 func (bufferPool *BufferPool) UpdateBlock(space uint32, pageNumber uint32, block *BufferBlock) {
 	bufferPool.lruCache.Remove(space, pageNumber)
 	bufferPool.flushBlockList.AddBlock(block)
@@ -110,7 +110,7 @@ func (flb *FreeBlockList) GetPage(spaceId uint32, pageNo uint32) *BufferBlock {
 	return result
 }
 
-//脏页
+// 脏页
 type FlushBlockList struct {
 	list list.List
 

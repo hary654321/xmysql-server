@@ -4,11 +4,11 @@ import (
 	_ "context"
 	"flag"
 	"fmt"
-	"github.com/zhukovaskychina/xmysql-server/initdb"
-	"github.com/zhukovaskychina/xmysql-server/server/conf"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/net"
 	"os"
 	"runtime"
+	"xmysql-server/initdb"
+	"xmysql-server/server/conf"
+	"xmysql-server/server/innodb/net"
 )
 
 const help = `

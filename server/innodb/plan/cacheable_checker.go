@@ -14,8 +14,8 @@
 package plan
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/ast"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/expression"
+	"xmysql-server/server/innodb/ast"
+	"xmysql-server/server/innodb/expression"
 )
 
 // Cacheable checks whether the input ast is cacheable.
@@ -31,8 +31,9 @@ func Cacheable(node ast.Node) bool {
 }
 
 // cacheableChecker checks whether a query's plan can be cached, querys that:
-//	 1. have ExistsSubqueryExpr, or
-//	 2. have VariableExpr
+//  1. have ExistsSubqueryExpr, or
+//  2. have VariableExpr
+//
 // will not be cached currently.
 // NOTE: we can add more rules in the future.
 type cacheableChecker struct {

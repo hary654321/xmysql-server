@@ -14,7 +14,7 @@
 package plan
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/expression"
+	"xmysql-server/server/innodb/expression"
 )
 
 func (p *DataSource) preparePossibleProperties() (result [][]*expression.Column) {

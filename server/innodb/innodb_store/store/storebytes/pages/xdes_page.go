@@ -1,8 +1,8 @@
 package pages
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/util"
+	"xmysql-server/server/common"
+	"xmysql-server/util"
 )
 
 type DESListNode struct {
@@ -12,11 +12,11 @@ type DESListNode struct {
 	NextNodeOffSet     []byte //2个字节	65536-1
 }
 
-//XDES entry,每个Entry 占用40个字节
-//一个XDES-ENtry 对应一个extent
+// XDES entry,每个Entry 占用40个字节
+// 一个XDES-ENtry 对应一个extent
 // XdesId 与xdesstate之间的关系 如果xdesid有值，则xdesstate为fseg
 // xdesflstNode 则是将相同状态的extent做了链接
-//根据顺序排序
+// 根据顺序排序
 type XDESEntry struct {
 	XDesId       []byte //8 个 byte 每个段都有唯一的编号，分配段的号码
 	XDesFlstNode []byte //12 个长度 XDesEntry链表 维持Extent链表的双向指针节点
@@ -24,7 +24,7 @@ type XDESEntry struct {
 	XDesBitMap   []byte //16个字节，一共128个bit，用两个bit表示Extent中的一个page，一个bit表示该page是否空闲的（XDES_FREE_BIT）,另一个保留位
 }
 
-//extentoffset 区的偏移量
+// extentoffset 区的偏移量
 func NewXdesEntry() XDESEntry {
 	var xdesEntry = new(XDESEntry)
 	xdesEntry.XDesId = util.AppendByte(8)
@@ -59,7 +59,7 @@ func (x *XDESEntry) SetDesFlstNode(prePageNodeNumber uint32, preOffset uint16, n
 	x.XDesFlstNode = append(x.XDesFlstNode, util.ConvertUInt2Bytes(nextPageOffset)...)
 }
 
-//获取第几个页面
+// 获取第几个页面
 func (x *XDESEntry) GetPageInfo(pageOffset int) bool {
 
 	index := pageOffset >> 4

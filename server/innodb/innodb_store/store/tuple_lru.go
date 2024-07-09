@@ -2,10 +2,10 @@ package store
 
 import (
 	"container/list"
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/schemas"
-	"github.com/zhukovaskychina/xmysql-server/util"
 	"sync"
+	"xmysql-server/server/common"
+	"xmysql-server/server/innodb/schemas"
+	"xmysql-server/util"
 )
 
 type TupleLRUCacheImpl struct {

@@ -1,10 +1,10 @@
 package store
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/conf"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/buffer_pool"
 	"testing"
+	"xmysql-server/server/conf"
+	"xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/buffer_pool"
 )
 
 func TestNewDataDictWrapper(t *testing.T) {

@@ -3,19 +3,19 @@ package engine
 import (
 	"github.com/goioc/di"
 	log "github.com/sirupsen/logrus"
-	"github.com/zhukovaskychina/xmysql-server/server/conf"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/ast"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/buffer_pool"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/innodb_store/store"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/schemas"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
 	"time"
+	"xmysql-server/server/conf"
+	"xmysql-server/server/innodb"
+	"xmysql-server/server/innodb/ast"
+	"xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/buffer_pool"
+	"xmysql-server/server/innodb/innodb_store/store"
+	"xmysql-server/server/innodb/schemas"
+	"xmysql-server/server/mysql"
 )
 
-//SQL执行引擎
-//默认一个实例
+// SQL执行引擎
+// 默认一个实例
 type XMySQLEngine struct {
 	conf *conf.Cfg
 	//定义查询线程
@@ -69,7 +69,7 @@ func purgeThread(system basic.FileSystem, spaceId uint32, pageNo uint32, block *
 	ts.FlushToDisk(pageNo, *(block.GetFrame()))
 }
 
-//ast->plan->storebytes->result->net
+// ast->plan->storebytes->result->net
 func (srv *XMySQLEngine) ExecuteQuery(session innodb.MySQLServerSession, query string) {
 
 	stmt, err := session.ParseOneSQL(query, mysql.UTF8Charset, mysql.UTF8DefaultCollation)

@@ -15,13 +15,13 @@ package expression
 
 import (
 	"fmt"
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
 	"math"
+	types "xmysql-server/server/innodb/basic"
 
 	"github.com/cznic/mathutil"
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
+	"xmysql-server/server/innodb/context"
+	"xmysql-server/server/mysql"
 )
 
 var (

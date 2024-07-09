@@ -3,14 +3,14 @@ package store
 import (
 	"fmt"
 	"github.com/stretchr/testify/assert"
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/server/conf"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/buffer_pool"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/innodb_store/store/storebytes/blocks"
-	"github.com/zhukovaskychina/xmysql-server/util"
 	"path"
 	"testing"
+	"xmysql-server/server/common"
+	"xmysql-server/server/conf"
+	"xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/buffer_pool"
+	"xmysql-server/server/innodb/innodb_store/store/storebytes/blocks"
+	"xmysql-server/util"
 )
 
 func TestNewSysTableSpace(t *testing.T) {

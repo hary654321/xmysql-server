@@ -1,8 +1,8 @@
 package store
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/schemas"
+	"xmysql-server/server/common"
+	"xmysql-server/server/innodb/schemas"
 )
 
 type InfoSchemasDB struct {

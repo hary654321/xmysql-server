@@ -1,13 +1,13 @@
 package store
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/server/conf"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/buffer_pool"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/innodb_store/store/storebytes/blocks"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/innodb_store/store/storebytes/pages"
-	"github.com/zhukovaskychina/xmysql-server/util"
 	"path"
+	"xmysql-server/server/common"
+	"xmysql-server/server/conf"
+	"xmysql-server/server/innodb/buffer_pool"
+	"xmysql-server/server/innodb/innodb_store/store/storebytes/blocks"
+	"xmysql-server/server/innodb/innodb_store/store/storebytes/pages"
+	"xmysql-server/util"
 )
 
 //分区表实际是由多个Tablespace组成的，每个Tablespace有独立的”.ibd”文件和Space_id，
@@ -23,12 +23,12 @@ import (
 //FSP_SEG_INODES_FULL：full inode page链表，链表中的每一项为inode page，该链表中的每个inode page内的inode entry都已经被使用
 //FSP_SEG_INODES_FREE：free inode page链表，链表中的每一项为inode page，该链表中的每个inode page内上有空闲inode entry可分配
 
-//Innodb的逻辑存储形式，表空间
-//表空间下面分为段，区，page
-//每个索引两个段，叶子段和非叶子段
-//回滚段
-//每个表文件都对应一个表空间
-//非系统表文件加载段的时候，需要从SYS_INDEXES 中查找并且加载出来
+// Innodb的逻辑存储形式，表空间
+// 表空间下面分为段，区，page
+// 每个索引两个段，叶子段和非叶子段
+// 回滚段
+// 每个表文件都对应一个表空间
+// 非系统表文件加载段的时候，需要从SYS_INDEXES 中查找并且加载出来
 type UnSysTableSpace struct {
 	TableSpace
 	conf         *conf.Cfg
@@ -54,12 +54,14 @@ type UnSysTableSpace struct {
 	pool *buffer_pool.BufferPool
 }
 
-/***
+/*
+**
 FSP HEADER PAGE
 
-FSP header page是表空间的root page，存储表空间关键元数据信息。由page file header、fsp header、xdes entries三大部分构成
+# FSP header page是表空间的root page，存储表空间关键元数据信息。由page file header、fsp header、xdes entries三大部分构成
 
-**/
+*
+*/
 func NewTableSpaceFile(cfg *conf.Cfg, databaseName string, tableName string, spaceId uint32, isSys bool, pool *buffer_pool.BufferPool) TableSpace {
 	tableSpace := new(UnSysTableSpace)
 	filePath := path.Join(cfg.DataDir, "/", databaseName)
@@ -164,7 +166,7 @@ func (tableSpace *UnSysTableSpace) LoadPageByPageNumber(pageNumber uint32) ([]by
 	return tableSpace.blockFile.ReadPageByNumber(pageNumber)
 }
 
-//获取INodeList
+// 获取INodeList
 func (tableSpace *UnSysTableSpace) GetSegINodeFullList() *INodeList {
 	var inodeList = NewINodeList("FULL_LIST")
 
@@ -213,7 +215,7 @@ func (tableSpace *UnSysTableSpace) GetSegINodeFreeList() *INodeList {
 
 }
 
-//TODO 需要解决FSP和XDES之间的衔接问题
+// TODO 需要解决FSP和XDES之间的衔接问题
 func (tableSpace *UnSysTableSpace) GetFspFreeExtentList() *ExtentList {
 	var extentList = NewExtentList("FREE_EXTENT")
 

@@ -16,11 +16,11 @@ package statistics
 import (
 	"fmt"
 	"github.com/juju/errors"
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/model"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/sessionctx/variable"
 	"math"
 	"strings"
+	types "xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/model"
+	"xmysql-server/server/innodb/sessionctx/variable"
 )
 
 const (

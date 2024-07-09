@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/terror"
 	"sync"
+	"xmysql-server/server/innodb/terror"
 )
 
 // ActionType is the type for DDL action.

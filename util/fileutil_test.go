@@ -2,10 +2,11 @@ package util
 
 import (
 	"fmt"
-	"github.com/smartystreets/assertions"
 	"io/ioutil"
 	"os"
 	"testing"
+
+	"github.com/smarty/assertions"
 )
 
 func TestWriteFileBySeekStart(t *testing.T) {

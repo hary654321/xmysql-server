@@ -2,10 +2,10 @@ package store
 
 import (
 	"bytes"
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/innodb_store/store/storebytes/pages"
+	"xmysql-server/server/common"
+	"xmysql-server/server/innodb/innodb_store/store/storebytes/pages"
 )
-import "github.com/zhukovaskychina/xmysql-server/util"
+import "xmysql-server/util"
 
 type Fsp struct {
 	//	IPageWrapper
@@ -29,7 +29,7 @@ func (fsp *Fsp) GetXDesEntryWrapper(id int32) *XDESEntryWrapper {
 	return fsp.xdesEntryMap[id]
 }
 
-//TODO 需要将FSPwrapper 和Fsp之间做更好的衔接
+// TODO 需要将FSPwrapper 和Fsp之间做更好的衔接
 func NewFsp(fspHrdBinaryPage *pages.FspHrdBinaryPage) IPageWrapper {
 	var fsp = new(Fsp)
 	fsp.fspHrdBinaryPage = fspHrdBinaryPage
@@ -120,7 +120,7 @@ func NewFspByLoadBytes(content []byte) IPageWrapper {
 	return NewFsp(fspBinary)
 }
 
-//页面最小
+// 页面最小
 func (fsp *Fsp) SetFreeLimit(freePageNo uint32) {
 	fsp.fspHrdBinaryPage.FileSpaceHeader.FreeLimit = util.ConvertUInt4Bytes(freePageNo)
 }
@@ -147,7 +147,7 @@ func (fsp *Fsp) ChangeNextSegmentId() {
 	fsp.fspHrdBinaryPage.FileSpaceHeader.NextUnusedSegmentId = util.ConvertULong8Bytes(segmentId)
 }
 
-//计算表空间，以Page页面数量计算
+// 计算表空间，以Page页面数量计算
 func (fsp *Fsp) GetFspSize() uint32 {
 	return util.ReadUB4Byte2UInt32(fsp.fspHrdBinaryPage.FileSpaceHeader.Size)
 }
@@ -156,18 +156,18 @@ func (fsp *Fsp) SetFspSize(size uint32) {
 	fsp.fspHrdBinaryPage.FileSpaceHeader.Size = util.ConvertUInt4Bytes(size)
 }
 
-//在空闲的Extent上最小的尚未被初始化的Page的PageNumber
+// 在空闲的Extent上最小的尚未被初始化的Page的PageNumber
 func (fsp *Fsp) GetFspFreeLimit() uint32 {
 	return util.ReadUB4Byte2UInt32(fsp.fspHrdBinaryPage.FileSpaceHeader.FreeLimit)
 }
 
-//获取FreeFrag链表中已经使用的数量
+// 获取FreeFrag链表中已经使用的数量
 func (fsp *Fsp) GetFragNUsed() uint32 {
 
 	return 0
 }
 
-//当一个Extent中所有page都未被使用时，放到该链表上，可以用于随后的分配
+// 当一个Extent中所有page都未被使用时，放到该链表上，可以用于随后的分配
 func (fsp *Fsp) GetFspFreeExtentListInfo() CommonNodeInfo {
 	segFullInodeList := fsp.fspHrdBinaryPage.FileSpaceHeader.BaseNodeForFreeList
 	return CommonNodeInfo{
@@ -179,12 +179,12 @@ func (fsp *Fsp) GetFspFreeExtentListInfo() CommonNodeInfo {
 	}
 }
 
-//给fsp设置free链表信息
+// 给fsp设置free链表信息
 func (fsp *Fsp) SetFspFreeExtentListInfo(info *CommonNodeInfo) {
 	fsp.fspHrdBinaryPage.FileSpaceHeader.BaseNodeForFreeList = info.ToBytes()
 }
 
-//Extent中所有的page都被使用掉时，会放到该链表上，当有Page从该Extent释放时，则移回FREE_FRAG链表
+// Extent中所有的page都被使用掉时，会放到该链表上，当有Page从该Extent释放时，则移回FREE_FRAG链表
 func (fsp *Fsp) GetFspFullFragListInfo() *CommonNodeInfo {
 	segFullInodeList := fsp.fspHrdBinaryPage.FileSpaceHeader.BaseNodeForFullFragList
 	return &CommonNodeInfo{
@@ -196,7 +196,7 @@ func (fsp *Fsp) GetFspFullFragListInfo() *CommonNodeInfo {
 	}
 }
 
-//FREE_FRAG链表的Base Node，通常这样的Extent中的Page可能归属于不同的segment，用于segment frag array page的分配（见下文）
+// FREE_FRAG链表的Base Node，通常这样的Extent中的Page可能归属于不同的segment，用于segment frag array page的分配（见下文）
 func (fsp *Fsp) GetFspFreeFragExtentListInfo() CommonNodeInfo {
 	segFullInodeList := fsp.fspHrdBinaryPage.FileSpaceHeader.BaseNodeForFragFreeList
 	return CommonNodeInfo{
@@ -216,8 +216,8 @@ func (fsp *Fsp) SetFullFragExtentListInfo(info *CommonNodeInfo) {
 	fsp.fspHrdBinaryPage.FileSpaceHeader.BaseNodeForFullFragList = info.ToBytes()
 }
 
-//segInodeFull链表的基节点
-//已被完全用满的Inode Page链表
+// segInodeFull链表的基节点
+// 已被完全用满的Inode Page链表
 func (fsp *Fsp) GetFullINodeBaseInfo() CommonNodeInfo {
 	segFullInodeList := fsp.fspHrdBinaryPage.FileSpaceHeader.SegFullINodesList
 	return CommonNodeInfo{
@@ -229,7 +229,7 @@ func (fsp *Fsp) GetFullINodeBaseInfo() CommonNodeInfo {
 	}
 }
 
-//至少存在一个空闲Inode Entry的Inode Page被放到该链表上
+// 至少存在一个空闲Inode Entry的Inode Page被放到该链表上
 func (fsp *Fsp) GetFreeSegINodeBaseInfo() CommonNodeInfo {
 	segFullInodeList := fsp.fspHrdBinaryPage.FileSpaceHeader.SegFullINodesList
 	return CommonNodeInfo{

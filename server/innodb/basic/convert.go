@@ -18,15 +18,15 @@
 package basic
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic/json"
 	"math"
 	"strconv"
 	"strings"
 	"unsafe"
+	"xmysql-server/server/innodb/basic/json"
 
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/sessionctx/variable"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
+	"xmysql-server/server/innodb/sessionctx/variable"
+	"xmysql-server/server/mysql"
 )
 
 func truncateStr(str string, flen int) string {

@@ -15,11 +15,11 @@ package aggregation
 
 import (
 	log "github.com/sirupsen/logrus"
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/expression"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/sessionctx/variable"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
+	types "xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/context"
+	"xmysql-server/server/innodb/expression"
+	"xmysql-server/server/innodb/sessionctx/variable"
+	"xmysql-server/server/mysql"
 )
 
 type sumFunction struct {

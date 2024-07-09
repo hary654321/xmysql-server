@@ -18,17 +18,17 @@ import (
 	"github.com/juju/errors"
 	log "github.com/sirupsen/logrus"
 
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/meta"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/schemas"
+	"xmysql-server/server/innodb/context"
+	"xmysql-server/server/innodb/meta"
+	"xmysql-server/server/innodb/schemas"
 
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/ast"
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/model"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
 	"math"
 	"sync"
 	"time"
+	"xmysql-server/server/innodb/ast"
+	types "xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/model"
+	"xmysql-server/server/mysql"
 )
 
 const maxPrefixLength = 3072
@@ -545,11 +545,14 @@ func getEndHandle(baseHandle, batch int64) int64 {
 // Each handle range by estimation, concurrent processing needs to perform after the handle range has been acquired.
 // The operation flow of the each task of data is as follows:
 //  1. Open a goroutine. Traverse the snapshot to obtain the handle range, while accessing the corresponding row key and
+//
 // raw index value. Then notify to start the next task.
 //  2. Decode this task of raw index value to get the corresponding index value.
 //  3. Deal with these index records one by one. If the index record exists, skip to the next row.
+//
 // If the index doesn't exist, create the index and then continue to handle the next row.
 //  4. When the handle of a range is completed, return the corresponding task result.
+//
 // The above operations are completed in a transaction.
 // When concurrent tasks are processed, the task result returned by each task is sorted by the worker number. Then traverse the
 // task results, get the total number of rows in the concurrent task and update the processed handle value. If

@@ -3,18 +3,18 @@ package store
 import (
 	"errors"
 	"fmt"
-	"github.com/smartystreets/assertions"
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/innodb_store/store/storebytes/pages"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/tuple"
 	"math"
 	"sort"
+	"xmysql-server/server/common"
+	"xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/innodb_store/store/storebytes/pages"
+	"xmysql-server/server/innodb/tuple"
+	"xmysql-server/util"
+
+	"github.com/smarty/assertions"
 )
 
-import "github.com/zhukovaskychina/xmysql-server/util"
-
-//数据页面的包装
+// 数据页面的包装
 type Index struct {
 	IPageWrapper
 	IndexPage   *pages.IndexPage
@@ -23,7 +23,7 @@ type Index struct {
 
 }
 
-//定义槽位行
+// 定义槽位行
 type SlotRow struct {
 	IsSupremum bool //是否最大
 	IsInfimum  bool //是否最小
@@ -32,7 +32,8 @@ type SlotRow struct {
 	RowOffSet  uint16 // 文件头next Record的位置，next_record在槽为中的偏移量，获得该值，就能获得最大值，	infimum的槽位99 38+56=94，94+5=99，从0开始 99
 }
 
-/**
+/*
+*
 如果是最小槽位，则返回1
 如果是最大槽位，则返回值不能超过7
 如果是中间槽位，则返回不能超过8
@@ -185,12 +186,14 @@ func (sr *SlotRows) setInfimumMaxRow(infimumRow basic.Row) {
 	(*sr)[0].MaxRow = infimumRow
 }
 
-/***
+/*
+**
 当前页面，获取所有记录链表
 的二进制码，
 槽位的具体内容
 所有的记录二进制大小
-***/
+**
+*/
 func (sr *SlotRows) GetRowDataAndSlotBytes() (rowdata []byte, slotdata []byte, recordSize uint16) {
 	//获取所有记录的字节数
 	var buff = make([]byte, 0)
@@ -214,7 +217,7 @@ func (sr *SlotRows) GetNDirs() int {
 	return len(*sr)
 }
 
-//根据槽位获取槽记录值
+// 根据槽位获取槽记录值
 func (sr *SlotRows) GetDirRows(index uint16) *SlotRow {
 
 	return (*sr)[index]
@@ -361,7 +364,7 @@ func (sr *SlotRows) GetRowListWithoutInfiuAndSupremum() []basic.Row {
 	return rows[1 : len(rows)-1]
 }
 
-//根据槽位返回数组下标
+// 根据槽位返回数组下标
 func (sr *SlotRows) search(row basic.Row) int {
 
 	lowIndex := 0
@@ -478,13 +481,13 @@ func (i *Index) GetPageNumber() uint32 {
 	return util.ReadUB4Byte2UInt32(i.IndexPage.FileHeader.FilePageOffset)
 }
 
-//叶子段
+// 叶子段
 func (i *Index) SetPageBtrTop(btrtop []byte) {
 	i.IndexPage.PageHeader.PageBtrSegLeaf = btrtop
 }
 
-//PageBtrSegTop
-//非叶子段
+// PageBtrSegTop
+// 非叶子段
 func (i *Index) SetPageBtrSegs(btrsegs []byte) {
 	i.IndexPage.PageHeader.PageBtrSegTop = btrsegs
 }
@@ -493,9 +496,9 @@ func (i *Index) GetPageHeader() pages.PageHeader {
 	return i.IndexPage.PageHeader
 }
 
-//索引页的跟页面记录两个结构
-//获取Inode的表空间号，INode的页面号，以及Inode的entry offset
-//返回spaceId，inode page id,inode entry offset
+// 索引页的跟页面记录两个结构
+// 获取Inode的表空间号，INode的页面号，以及Inode的entry offset
+// 返回spaceId，inode page id,inode entry offset
 func (i *Index) GetCurrentINodePageNumber() (uint32, uint32, uint16) {
 
 	var buff = i.IndexPage.PageHeader.PageBtrSegTop
@@ -503,19 +506,19 @@ func (i *Index) GetCurrentINodePageNumber() (uint32, uint32, uint16) {
 	return util.ReadUB4Byte2UInt32(buff[0:4]), util.ReadUB4Byte2UInt32(buff[4:8]), util.ReadUB2Byte2Int(buff[8:10])
 }
 
-//获取页面类型
+// 获取页面类型
 func (i *Index) GetFilePageType() uint16 {
 	return util.ReadUB2Byte2Int(i.IndexPage.FileHeader.FilePageType)
 }
 
-//根据26个字段判断当前页面属于叶子还是非叶子节点
+// 根据26个字段判断当前页面属于叶子还是非叶子节点
 func (i *Index) GetIndexPageType() string {
 
 	firstByte := i.IndexPage.InfimumSupermum[0]
 	return util.ConvertByte2BitsString(firstByte)[3]
 }
 
-//增加记录
+// 增加记录
 func (i *Index) AddRow(row basic.Row) {
 	//初始化
 	if i.GetRecordSize() == 0 {
@@ -564,7 +567,7 @@ func (i *Index) AddRows(rows []basic.Row) {
 	}
 }
 
-//判断是否还有足够空间插入
+// 判断是否还有足够空间插入
 func (i *Index) IsFullParams(row basic.Row) bool {
 	size := len(i.IndexPage.FreeSpace)
 	return len(row.ToByte()) < size
@@ -581,9 +584,8 @@ func (i *Index) Delete(key basic.Row, row basic.Row) {
 
 }
 
-//根据字节码转换行
-//需要根据页面类型，判断是否是leaf还是internal
-//
+// 根据字节码转换行
+// 需要根据页面类型，判断是否是leaf还是internal
 func (i *Index) parseIndexBytes2SlotRows(content []byte, pageType string) {
 	//获取当前页面的所有记录
 	recordSize := i.GetRecordSize()
@@ -712,7 +714,7 @@ func (i *Index) GetRowByIndex(index int) (row basic.Row, found bool) {
 
 }
 
-//平衡
+// 平衡
 func (i *Index) BalancePage(index *Index) error {
 	recordSize := i.GetRecordSize()
 	rows, _ := i.GetRowsByIndex(recordSize + 1)
@@ -754,8 +756,8 @@ func (i *Index) TruncateByIndex(index int) {
 
 }
 
-//根据Key值查找
-//如果没有则返回false，同时返回该非叶子记录的行，里面包括了，子页面的页面号
+// 根据Key值查找
+// 如果没有则返回false，同时返回该非叶子记录的行，里面包括了，子页面的页面号
 func (i *Index) Find(rows basic.Row) (row basic.Row, found bool) {
 	fullList := i.SlotRowData.GetRowListWithoutInfiuAndSupremum()
 	if rows == nil {
@@ -773,9 +775,9 @@ func (i *Index) Find(rows basic.Row) (row basic.Row, found bool) {
 	return fullList[index-1], false
 }
 
-//根据Key值查找
-//如果没有则返回false，同时返非叶子记录的行，里面包括了，子页面的页面号
-//TODO 暂时搁置二分查找逻辑
+// 根据Key值查找
+// 如果没有则返回false，同时返非叶子记录的行，里面包括了，子页面的页面号
+// TODO 暂时搁置二分查找逻辑
 func (i *Index) FindByKey(targetKey basic.Value) (row basic.Row, found bool) {
 
 	fullList := i.SlotRowData.GetRowListWithoutInfiuAndSupremum()
@@ -822,17 +824,17 @@ func (i *Index) GetRecordByIndex(index int) basic.Row {
 	return fullList[index-1]
 }
 
-///获取所有记录
+// /获取所有记录
 func (i *Index) GetRecordSize() int {
 	return int(util.ReadUB2Byte2Int(i.IndexPage.PageHeader.PageNRecs))
 }
 
-//获取槽位的大小
+// 获取槽位的大小
 func (i *Index) GetSlotNDirs() int {
 	return int(util.ReadUB2Byte2Int(i.IndexPage.PageHeader.PageNDirSlots))
 }
 
-//根据槽位的偏移量获取字节
+// 根据槽位的偏移量获取字节
 func (i *Index) getSlotMaxRowSize(currentIdx int) uint16 {
 	slotDirsCnt := i.GetSlotNDirs()
 	assertions.ShouldBeLessThan(currentIdx, slotDirsCnt)
@@ -840,7 +842,7 @@ func (i *Index) getSlotMaxRowSize(currentIdx int) uint16 {
 	return directory[currentIdx]
 }
 
-//获取槽位下标
+// 获取槽位下标
 func (i *Index) getSlotDirs() []uint16 {
 	pageDirectory := i.IndexPage.PageDirectory
 	var buff = make([]uint16, 0)
@@ -850,7 +852,7 @@ func (i *Index) getSlotDirs() []uint16 {
 	return buff
 }
 
-//获取第几个记录
+// 获取第几个记录
 func (n *Index) doValueAt(i int, do func(row basic.Row) error) error {
 	value := n.GetRecordByIndex(i)
 	return do(value)
@@ -885,8 +887,8 @@ func (n *Index) GetMiniumRecord() basic.Row {
 	return n.GetRecordByIndex(0)
 }
 
-//ph.PageBtrSegLeaf = buff[36:46]  //B+树中叶子节点端的头部信息，尽在B+树中的跟页面中定义
-//ph.PageBtrSegTop = buff[46:56]   //B+树中非叶子节点端的头部信息，尽在B+树中的跟页面中定义
+// ph.PageBtrSegLeaf = buff[36:46]  //B+树中叶子节点端的头部信息，尽在B+树中的跟页面中定义
+// ph.PageBtrSegTop = buff[46:56]   //B+树中非叶子节点端的头部信息，尽在B+树中的跟页面中定义
 func (i *Index) GetSegLeaf() []byte {
 	return i.IndexPage.PageHeader.PageBtrSegLeaf
 }

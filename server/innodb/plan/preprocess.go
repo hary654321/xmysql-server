@@ -15,9 +15,9 @@ package plan
 
 import (
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/ast"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/schemas"
+	"xmysql-server/server/innodb/ast"
+	"xmysql-server/server/innodb/context"
+	"xmysql-server/server/innodb/schemas"
 )
 
 // Preprocess does preprocess work for optimizer.

@@ -14,7 +14,7 @@
 package plan
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/ast"
+	"xmysql-server/server/innodb/ast"
 )
 
 // AggregateFuncExtractor visits Expr tree.

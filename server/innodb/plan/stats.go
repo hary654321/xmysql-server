@@ -17,7 +17,7 @@ import (
 	"math"
 
 	log "github.com/sirupsen/logrus"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/expression"
+	"xmysql-server/server/innodb/expression"
 )
 
 // statsProfile stores the basic information of statistics for the a plan's output. It is used for cost estimation.

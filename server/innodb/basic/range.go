@@ -20,7 +20,7 @@ import (
 	"strings"
 
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/sessionctx/variable"
+	"xmysql-server/server/innodb/sessionctx/variable"
 )
 
 // Range is the interface of the three type of range.

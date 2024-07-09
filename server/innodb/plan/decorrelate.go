@@ -15,11 +15,11 @@ package plan
 
 import (
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/ast"
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/expression"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/expression/aggregation"
+	"xmysql-server/server/innodb/ast"
+	types "xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/context"
+	"xmysql-server/server/innodb/expression"
+	"xmysql-server/server/innodb/expression/aggregation"
 )
 
 // extractCorColumnsBySchema only extracts the correlated columns that match the outer plan's schema.

@@ -15,10 +15,10 @@ package context
 
 import (
 	"fmt"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
 	goctx "golang.org/x/net/context"
+	"xmysql-server/server/innodb/basic"
 
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/sessionctx/variable"
+	"xmysql-server/server/innodb/sessionctx/variable"
 )
 
 // Context is an interface for transaction and executive args environment.

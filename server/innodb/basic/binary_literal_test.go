@@ -14,7 +14,7 @@
 package basic
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/util/testleak"
+	"xmysql-server/server/innodb/util/testleak"
 )
 
 var _ = Suite(&testBinaryLiteralSuite{})

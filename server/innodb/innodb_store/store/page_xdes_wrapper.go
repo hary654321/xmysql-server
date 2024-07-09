@@ -1,8 +1,8 @@
 package store
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/innodb_store/store/storebytes/pages"
-	"github.com/zhukovaskychina/xmysql-server/util"
+	"xmysql-server/server/innodb/innodb_store/store/storebytes/pages"
+	"xmysql-server/util"
 )
 
 type XDesPageWrapper struct {
@@ -41,9 +41,9 @@ func ParseXDesPage(content []byte) *XDesPageWrapper {
 	return &XDesPageWrapper{xdes: *xDesPage}
 }
 
-//查找指定段的某个页面的信息
-//true 表明页面为空
-//false 表明该页面为满
+// 查找指定段的某个页面的信息
+// true 表明页面为空
+// false 表明该页面为满
 func (xdes *XDesPageWrapper) GetSpecifiedPageStatus(pageoffset int, segmentId uint64) bool {
 
 	for _, v := range xdes.xdes.XDESEntries {

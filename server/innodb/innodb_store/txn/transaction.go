@@ -1,6 +1,6 @@
 package txn
 
-import types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
+import types "xmysql-server/server/innodb/basic"
 
 type Txn struct {
 	types.XMySQLTransaction

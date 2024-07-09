@@ -1,6 +1,6 @@
 package ibd
 
-import "github.com/zhukovaskychina/xmysql-server/server/innodb/innodb_store/store/storebytes/pages"
+import "xmysql-server/server/innodb/innodb_store/store/storebytes/pages"
 
 type SysIBData struct {
 	FspHrdPage *pages.FspHrdBinaryPage //0

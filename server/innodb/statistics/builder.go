@@ -15,11 +15,11 @@ package statistics
 
 import (
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/ast"
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/sessionctx/variable"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/util/codec"
+	"xmysql-server/server/innodb/ast"
+	types "xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/context"
+	"xmysql-server/server/innodb/sessionctx/variable"
+	"xmysql-server/server/innodb/util/codec"
 )
 
 // SortedBuilder is used to build histograms for PK and index.

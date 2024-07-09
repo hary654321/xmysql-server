@@ -22,19 +22,19 @@
 package expression
 
 import (
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic/json"
 	"math"
 	"strconv"
 	"strings"
+	types "xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/basic/json"
 
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/ast"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/model"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/terror"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/util/charset"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
+	"xmysql-server/server/innodb/ast"
+	"xmysql-server/server/innodb/context"
+	"xmysql-server/server/innodb/model"
+	"xmysql-server/server/innodb/terror"
+	"xmysql-server/server/innodb/util/charset"
+	"xmysql-server/server/mysql"
 )
 
 var (

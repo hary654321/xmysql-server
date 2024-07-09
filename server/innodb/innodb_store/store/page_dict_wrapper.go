@@ -2,12 +2,12 @@ package store
 
 import (
 	"fmt"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/buffer_pool"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/innodb_store/store/storebytes/pages"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/innodb_store/store/storebytes/segs"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/tuple"
-	"github.com/zhukovaskychina/xmysql-server/util"
+	"xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/buffer_pool"
+	"xmysql-server/server/innodb/innodb_store/store/storebytes/pages"
+	"xmysql-server/server/innodb/innodb_store/store/storebytes/segs"
+	"xmysql-server/server/innodb/tuple"
+	"xmysql-server/util"
 )
 
 type DataDictWrapper struct {
@@ -65,7 +65,6 @@ func (d *DataDictWrapper) SetDataDictSegments() {
 	d.DataHrdPage.SegmentHeader = d.SegmentHeader.GetBytes()
 }
 
-//
 func NewDataDictWrapperByBytes(content []byte) *DataDictWrapper {
 	return &DataDictWrapper{
 		DataHrdPage: pages.ParseDataDictHrdPage(content),
@@ -150,9 +149,11 @@ func NewDictionarySys(pool *buffer_pool.BufferPool) *DictionarySys {
 	return dictSys
 }
 
-/**
+/*
+*
 用于mysql创建初始化的时候，用于创建和初始化数据字典
-**/
+*
+*/
 func NewDictionarySysAtInit() *DictionarySys {
 	var dictSys = new(DictionarySys)
 	dictSys.currentRowId = 0
@@ -197,7 +198,7 @@ func NewDictionarySysByWrapper(dt *DataDictWrapper) *DictionarySys {
 	return dictSys
 }
 
-//加载数据字典表
+// 加载数据字典表
 func (dictSys *DictionarySys) loadDictionary(pool *buffer_pool.BufferPool) {
 
 	bufferblock7 := pool.GetPageBlock(0, 7)
@@ -304,26 +305,28 @@ func (dictSys *DictionarySys) CreateTable(databaseName string, tuple *TableTuple
 	return nil
 }
 
-//创建系统文件表
+// 创建系统文件表
 func (dictSys *DictionarySys) initializeSysDataFilesTable(databaseName string, tuple tuple.TableRowTuple) (err error) {
 
 	return dictSys.createSystemTable(databaseName, tuple, 13, 0)
 }
 
-//创建空间表
+// 创建空间表
 func (dictSys *DictionarySys) initializeSysTableSpacesTable(databaseName string, tuple tuple.TableRowTuple) (err error) {
 
 	return dictSys.createSystemTable(databaseName, tuple, 16, 0)
 
 }
 
-/**
+/*
+*
 创建系统表
 @param	 databaseName 数据库名称
 @param   tuple 元祖信息
 
 每创建一个表，需要记录Columns
-***/
+**
+*/
 func (dictSys *DictionarySys) createSystemTable(databaseName string, tuple tuple.TableRowTuple, rootNo uint32, spaceId uint32) (err error) {
 	//插入到SYS_TABLE中
 

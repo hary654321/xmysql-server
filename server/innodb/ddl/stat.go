@@ -14,7 +14,7 @@
 package ddl
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/sessionctx/variable"
+	"xmysql-server/server/innodb/sessionctx/variable"
 )
 
 var (

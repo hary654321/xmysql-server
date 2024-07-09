@@ -16,15 +16,15 @@ package expression
 import (
 	"bytes"
 	"fmt"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic/json"
+	"xmysql-server/server/innodb/basic/json"
 
 	"github.com/juju/errors"
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/sessionctx/variable"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/terror"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/util/codec"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
+	types "xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/context"
+	"xmysql-server/server/innodb/sessionctx/variable"
+	"xmysql-server/server/innodb/terror"
+	"xmysql-server/server/innodb/util/codec"
+	"xmysql-server/server/mysql"
 )
 
 var (

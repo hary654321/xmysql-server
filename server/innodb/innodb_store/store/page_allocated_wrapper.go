@@ -2,8 +2,8 @@ package store
 
 import (
 	"bytes"
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/innodb_store/store/storebytes/pages"
+	"xmysql-server/server/common"
+	"xmysql-server/server/innodb/innodb_store/store/storebytes/pages"
 )
 
 type Allocated struct {
@@ -30,7 +30,7 @@ func (a *Allocated) GetFileTrailer() *pages.FileTrailer {
 	panic("implement me")
 }
 
-//用于实现
+// 用于实现
 func NewAllocatedPage(pageNumber uint32) IPageWrapper {
 	var allocated = new(Allocated)
 	allocated.body = make([]byte, 16384-38-8)

@@ -5,7 +5,7 @@ import "testing"
 //import (
 //	"fmt"
 //	"testing"
-//	"github.com/zhukovaskychina/xmysql-server/server/innodb/sqlparser"
+//	"xmysql-server/server/innodb/sqlparser"
 //)
 
 func TestDDL(t *testing.T) {

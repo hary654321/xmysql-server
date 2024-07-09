@@ -1,7 +1,7 @@
 package basic
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/conf"
+	"xmysql-server/server/conf"
 )
 
 type FileSystem interface {
@@ -10,7 +10,7 @@ type FileSystem interface {
 	GetTableSpaceById(spaceId uint32) FileTableSpace
 }
 
-//用于缓存TableSpace
+// 用于缓存TableSpace
 type FileSystemSpace struct {
 	FileSystem
 	cfg    *conf.Cfg

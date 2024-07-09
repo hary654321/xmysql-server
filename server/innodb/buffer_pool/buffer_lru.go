@@ -3,10 +3,10 @@ package buffer_pool
 import (
 	"container/list"
 	"errors"
-	"github.com/zhukovaskychina/xmysql-server/util"
 	"math"
 	"sync"
 	"sync/atomic"
+	"xmysql-server/util"
 )
 
 var KeyNotFoundError = errors.New("Key not found.")
@@ -203,7 +203,7 @@ func (L *LRUCacheImpl) Has(spaceId uint32, pageNo uint32) bool {
 	panic("implement me")
 }
 
-//TODO 校验这里的hashcode的安全性
+// TODO 校验这里的hashcode的安全性
 func (L LRUCacheImpl) SetYoung(spaceId uint32, pageNo uint32, value *BufferBlock) {
 	L.mu.Lock()
 	defer L.mu.Unlock()

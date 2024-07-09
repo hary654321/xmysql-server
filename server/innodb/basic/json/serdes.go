@@ -22,8 +22,8 @@ import (
 	"unsafe"
 
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/terror"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/util/hack"
+	"xmysql-server/server/innodb/terror"
+	"xmysql-server/server/innodb/util/hack"
 )
 
 /*

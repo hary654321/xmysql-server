@@ -3,12 +3,12 @@ package store
 import (
 	"fmt"
 	"github.com/pkg/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/buffer_pool"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/innodb_store/store/storebytes/blocks"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/tuple"
-	"github.com/zhukovaskychina/xmysql-server/util"
+	"xmysql-server/server/common"
+	"xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/buffer_pool"
+	"xmysql-server/server/innodb/innodb_store/store/storebytes/blocks"
+	"xmysql-server/server/innodb/tuple"
+	"xmysql-server/util"
 )
 
 // BTree is an implementation of a B-Tree.
@@ -62,7 +62,7 @@ func (self *BTree) GetInternalSegment() basic.XMySQLSegment {
 	return self.indexSegment
 }
 
-//用于构建
+// 用于构建
 func NewBtreeAtInit(rootPageNo uint32, indexName string,
 	indexSegments Segment, dataSegments Segment,
 	rootIndex *Index,
@@ -151,9 +151,9 @@ func (self *BTree) firstKey(pageNumber uint32, do func(key basic.Value) error) e
 	)
 }
 
-//func (t *BTree) doKeyAt(pageNumber uint32,do func(key innodb.Value) error) error  {
-//	return do(pageNumber)
-//}
+//	func (t *BTree) doKeyAt(pageNumber uint32,do func(key innodb.Value) error) error  {
+//		return do(pageNumber)
+//	}
 func (self *BTree) doInternal(pageNumber uint32, do func(index *Index) error) error {
 	return self.do(pageNumber, do, func(internal *Index) error {
 		fmt.Println("=============")
@@ -243,7 +243,6 @@ func (self *BTree) doKV(pageNumber uint32, i int, do func(key basic.Value, value
 	})
 }
 
-//
 func (self *BTree) forward(from, to basic.Value) (bi bpt_iterator, err error) {
 	a, i, err := self.getStart(from)
 	if err != nil {
@@ -277,7 +276,6 @@ func (self *BTree) forward(from, to basic.Value) (bi bpt_iterator, err error) {
 	return self.forwardFrom(a, i, to)
 }
 
-//
 func (self *BTree) forwardFrom(a uint32, i int, to basic.Value) (bi bpt_iterator, err error) {
 	i--
 	bi = func() (uint32, int, error, bpt_iterator) {
@@ -315,7 +313,6 @@ func (self *BTree) forwardFrom(a uint32, i int, to basic.Value) (bi bpt_iterator
 	return bi, nil
 }
 
-//
 func (self *BTree) backward(from, to basic.Value) (bi bpt_iterator, err error) {
 	a, i, err := self.getEnd(from)
 	if err != nil {
@@ -349,7 +346,6 @@ func (self *BTree) backward(from, to basic.Value) (bi bpt_iterator, err error) {
 	return self.backwardFrom(a, i, to)
 }
 
-//
 func (self *BTree) backwardFrom(a uint32, i int, to basic.Value) (bi bpt_iterator, err error) {
 	i++
 	bi = func() (uint32, int, error, bpt_iterator) {
@@ -391,8 +387,8 @@ func (self *BTree) backwardFrom(a uint32, i int, to basic.Value) (bi bpt_iterato
 	return bi, nil
 }
 
-//获取下一个页面号，理论上是连续的
-//后面需要加载LRU内的页面
+// 获取下一个页面号，理论上是连续的
+// 后面需要加载LRU内的页面
 func (self *BTree) nextLoc(pageNo uint32, i int) (uint32, int, bool, error) {
 	j := i + 1
 	nextBlk := func(pageNo uint32, j int) (uint32, int, bool, error) {
@@ -431,8 +427,8 @@ func (self *BTree) nextLoc(pageNo uint32, i int) (uint32, int, bool, error) {
 	return pageNo, j, end, nil
 }
 
-//获取下一个页面号，理论上是连续的
-//后面需要加载LRU内的页面
+// 获取下一个页面号，理论上是连续的
+// 后面需要加载LRU内的页面
 func (self *BTree) prevLoc(pageNo uint32, i int) (uint32, int, bool, error) {
 	j := i - 1
 	prevBlk := func(pageNo uint32, j int) (uint32, int, bool, error) {
@@ -569,8 +565,7 @@ func (self *BTree) internalGetStart(n uint32, key basic.Value) (pageNo uint32, i
 	return self._getStart(kid, key)
 }
 
-//叶子页面的查找
-//
+// 叶子页面的查找
 func (self *BTree) leafGetStart(n uint32, key basic.Value, stop bool, end uint32) (pageNo uint32, i int, err error) {
 	if key == nil {
 		return n, 0, nil
@@ -643,7 +638,6 @@ func (self *BTree) lastKey(n uint32) (pageNo uint32, i int, err error) {
 
 }
 
-//
 func (self *BTree) internalLastKey(n uint32) (a uint32, i int, err error) {
 	var kid uint32
 	err = self.doInternal(n, func(nIndex *Index) error {

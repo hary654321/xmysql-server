@@ -14,8 +14,8 @@
 package sessionctx
 
 import (
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/context"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/domain"
+	"xmysql-server/server/innodb/context"
+	"xmysql-server/server/innodb/domain"
 )
 
 // domainKeyType is a dummy type to avoid naming collision in context.

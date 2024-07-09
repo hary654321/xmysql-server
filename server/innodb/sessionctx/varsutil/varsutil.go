@@ -21,9 +21,9 @@ import (
 	"time"
 
 	"github.com/juju/errors"
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/sessionctx/variable"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
+	types "xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/sessionctx/variable"
+	"xmysql-server/server/mysql"
 )
 
 // GetSessionSystemVar gets a system variable.

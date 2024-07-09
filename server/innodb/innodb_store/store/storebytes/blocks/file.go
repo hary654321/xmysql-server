@@ -2,15 +2,15 @@ package blocks
 
 import (
 	"fmt"
-	"github.com/zhukovaskychina/xmysql-server/server/common"
-	"github.com/zhukovaskychina/xmysql-server/util"
 	"io"
 	"log"
 	"os"
 	"path"
+	"xmysql-server/server/common"
+	"xmysql-server/util"
 )
 
-//存储中间层
+// 存储中间层
 type BlockFile struct {
 	StorageFile *os.File
 	FilePath    string
@@ -21,7 +21,7 @@ type BlockFile struct {
 	WriteNumber int //写数量
 }
 
-//os.O_RDWR|os.O_CREATE|os.O_APPEND, os.ModeAppend
+// os.O_RDWR|os.O_CREATE|os.O_APPEND, os.ModeAppend
 func NewBlockFile(filePath string, fileName string, fileSize int64) *BlockFile {
 	blockFile := new(BlockFile)
 
@@ -185,9 +185,9 @@ func (blockFile *BlockFile) WriteFileBySeekStart(offset uint64, data []byte) {
 
 }
 
-//****
-//根据
-//***//
+// ****
+// 根据
+// ***//
 func (blockFile *BlockFile) WriteContentByPage(pageNum int64, data []byte) error {
 	blockFile.OpenFile()
 	_, err := blockFile.StorageFile.Seek(int64(pageNum)*common.PAGE_SIZE, io.SeekStart)
@@ -219,9 +219,11 @@ func (blockFile *BlockFile) Size() int64 {
 	return fd.Size()
 }
 
-/**
+/*
+*
 根据页面号写入页面
-**/
+*
+*/
 func (blockFile *BlockFile) WritePageContentFileBySeekStart(pageOffset uint64, data []byte) error {
 	blockFile.OpenFile()
 	blockFile.AddRead()
@@ -243,7 +245,6 @@ func (blockFile *BlockFile) WritePageContentFileBySeekStart(pageOffset uint64, d
 	return nil
 }
 
-//
 func (blockFile *BlockFile) Do(offset uint32, do func([]byte) error) error {
 	bytes, err := blockFile.ReadPageByNumber(uint32(offset))
 	if err != nil {
@@ -253,7 +254,7 @@ func (blockFile *BlockFile) Do(offset uint32, do func([]byte) error) error {
 	return err
 }
 
-//通常加载64个页面
+// 通常加载64个页面
 func (blockFile BlockFile) DoRange(startOffset uint32, endOffset uint32, do func([]byte, uint32, uint32) error) error {
 	bytes, err := blockFile.ReadFileBySeekStartWithSize(uint64(startOffset*common.PAGE_SIZE), int64((endOffset-startOffset)*(common.PAGE_SIZE)))
 	if err != nil {

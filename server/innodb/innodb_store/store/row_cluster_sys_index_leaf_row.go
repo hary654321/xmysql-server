@@ -3,9 +3,9 @@ package store
 import (
 	"bytes"
 	"fmt"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/tuple"
-	"github.com/zhukovaskychina/xmysql-server/util"
+	"xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/tuple"
+	"xmysql-server/util"
 )
 
 type ClusterSysIndexLeafRow struct {

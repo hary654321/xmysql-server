@@ -15,10 +15,10 @@ package aggregation
 
 import (
 	"github.com/juju/errors"
-	types "github.com/zhukovaskychina/xmysql-server/server/innodb/basic"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/sessionctx/variable"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/terror"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
+	types "xmysql-server/server/innodb/basic"
+	"xmysql-server/server/innodb/sessionctx/variable"
+	"xmysql-server/server/innodb/terror"
+	"xmysql-server/server/mysql"
 )
 
 type avgFunction struct {

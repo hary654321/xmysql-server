@@ -22,10 +22,10 @@ import (
 	"strings"
 
 	"github.com/juju/errors"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/parser/opcode"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/terror"
-	"github.com/zhukovaskychina/xmysql-server/server/innodb/util/charset"
-	"github.com/zhukovaskychina/xmysql-server/server/mysql"
+	"xmysql-server/server/innodb/parser/opcode"
+	"xmysql-server/server/innodb/terror"
+	"xmysql-server/server/innodb/util/charset"
+	"xmysql-server/server/mysql"
 )
 
 // IsTypeBlob returns a boolean indicating whether the tp is a blob type.
@@ -136,6 +136,7 @@ func TypeStr(tp byte) (r string) {
 // It is used for converting Text to Blob,
 // or converting Char to Binary.
 // Args:
+//
 //	tp: type enum
 //	cs: charset
 func TypeToStr(tp byte, cs string) (r string) {
